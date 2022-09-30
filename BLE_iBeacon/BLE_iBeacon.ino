@@ -7,11 +7,11 @@
 
 
 
-#define GPIO_DEEP_SLEEP_DURATION     2  // sleep x seconds and then wake up
+#define GPIO_DEEP_SLEEP_DURATION     1  // sleep x seconds and then wake up
 //RTC SLOW MEME SECTION
 RTC_DATA_ATTR static time_t last;        // remember last boot in RTC Memory
 RTC_DATA_ATTR static uint32_t bootcount; // remember number of boots in RTC Memory
-RTC_DATA_ATTR static uint32_t busID =0x0010;     // 32 byte major id
+RTC_DATA_ATTR static uint32_t busID = 0x0010;     // 16 bit major id
 
 
 BLEAdvertising *pAdvertising;   // BLE Advertisement type
@@ -26,8 +26,9 @@ void setBeacon() {
   BLEBeacon oBeacon = BLEBeacon();
   oBeacon.setManufacturerId(0x4C00); // fake Apple 0x004C LSB (ENDIAN_CHANGE_U16!)
   oBeacon.setProximityUUID(BLEUUID(BEACON_UUID));
-  oBeacon.setMajor(busID);//0x0102
-  oBeacon.setMinor(0x0001);
+  oBeacon.setMajor((bootcount & 0xFFFF0000) >> 16);//0x0102
+  Serial.printf("busID:%x\n", busID);
+  oBeacon.setMinor(bootcount & 0xFFFF);
   BLEAdvertisementData oAdvertisementData = BLEAdvertisementData();
   BLEAdvertisementData oScanResponseData = BLEAdvertisementData();
   oAdvertisementData.setFlags(0x04); // BR_EDR_NOT_SUPPORTED 0x04, meaning not classic bluetooth
