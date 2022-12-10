@@ -1,51 +1,49 @@
+#include <LiquidCrystal_I2C.h>
 #include <Wire.h>
-#include <Adafruit_RGBLCDShield.h>
-#include <utility/Adafruit_MCP23017.h>
 
-Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
+#define I2C_SDA 4
+#define I2C_SCL 5
 
-// These #defines make it easy to set the backlight color
+void disp_ID(int id);
 
-void setup() {
-  // Debugging output
-  Serial.begin(9600);
-  // set up the LCD's number of columns and rows: 
-  lcd.begin(16, 2);
+// set the LCD number of columns and rows
+int lcdColumns = 16;
+int lcdRows = 2;
+int i = 0;
 
-  int time = millis();
-  lcd.print("ESP 32");
-  time = millis() - time;
-  Serial.print("Took "); Serial.print(time); Serial.println(" ms");
-  lcd.setBacklight(WHITE);
+// set LCD address, number of columns and rows
+// if you don't know your display address, run an I2C scanner sketch
+LiquidCrystal_I2C lcd(0x63, lcdColumns, lcdRows);  
+
+void setup(){
+  Serial.begin(115200);
+  Wire.begin(I2C_SDA, I2C_SCL);
+
+  // initialize LCD
+  lcd.init();
+  // turn on LCD backlight                      
+  lcd.backlight();
+
+  lcd.setCursor(0, 0);
+  // print message
+  lcd.print("ID : ");
 }
 
-uint8_t i=0;
-void loop() {
-  // set the cursor to column 0, line 1
-  // (note: line 1 is the second row, since counting begins with 0):
-  lcd.setCursor(0, 1);
-  // print the number of seconds since reset:
-  lcd.print(millis()/1000);
+void loop(){
+  // set cursor to first column, first row
+  
+  //delay(1000);
+  // clears the display to print new message
+  if(i < 8)
+  {
+    disp_id(i);
+    delay(1000);
+  } 
+}
 
-  uint8_t buttons = lcd.readButtons();
-
-  if (buttons) {
-    lcd.clear();
-    lcd.setCursor(0,0);
-    if (buttons & BUTTON_UP) {
-      lcd.print("UP ");
-      lcd.setBacklight(ON);
-    }
-    if (buttons & BUTTON_DOWN) {
-      lcd.print("DOWN ");
-      lcd.setBacklight(OFF);
-    }
-    if (buttons & BUTTON_RIGHT) {
-      lcd.print("RIGHT ");
-      lcd.setBacklight(ON);
-    }
-    if (buttons & BUTTON_LEFT) {
-      lcd.print("LEFT ");
-      lcd.setBacklight(ON);
-    }    
+void disp_id(int id)
+{
+  lcd.setCursor(0, i);
+  lcd.print(id);
+  i++;
 }
