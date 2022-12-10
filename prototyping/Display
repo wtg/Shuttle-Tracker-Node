@@ -13,7 +13,7 @@ int i = 0;
 
 // set LCD address, number of columns and rows
 // if you don't know your display address, run an I2C scanner sketch
-LiquidCrystal_I2C lcd(0x63, lcdColumns, lcdRows);  
+LiquidCrystal_I2C lcd(0x20, lcdColumns, lcdRows);  //0x20 is the I2c address of our LCD
 
 void setup(){
   Serial.begin(115200);
