@@ -1,0 +1,490 @@
+﻿STEP to UG
+! INFO-     NX STEP AP203 - V1926
+! INFO-      
+! INFO-     Start of Translation: 30-NOV-2022  4:45:31 PM
+! INFO-      
+! STATUS-   Converting Part: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\PCB_ESP32-38Pines.step
+! SUMMARY-   
+! SUMMARY-    STEP Header Information
+! SUMMARY-   
+! SUMMARY-  Description      Unknown
+! SUMMARY-  Imp_Level        2;1
+! SUMMARY-  File_Name        C:/Users/CDMX Electrónica/Desktop/PCB_ESP32-38Pines.step
+! SUMMARY-  Date             2020-08-26T17:51:04-05:00
+! SUMMARY-  Author           Unknown
+! SUMMARY-  Organization     Unknown
+! SUMMARY-  Pre_Version      ST-DEVELOPER v18.1
+! SUMMARY-  Orig_System      Autodesk Translation Framework v9.3.0.1241
+! SUMMARY-  Authorization    Unknown
+! SUMMARY-  Schema_ID        automotive_design
+! SUMMARY-   
+! SUMMARY-    Summary of STEP Entities
+! SUMMARY-   
+! SUMMARY-  Entity Type                                                   Count
+! SUMMARY-  -----------                                                   ------
+! SUMMARY-  advanced_face ..............................................:   9399
+! SUMMARY-  application_context ........................................:      1
+! SUMMARY-  axis2_placement_3d .........................................:   8181
+! SUMMARY-  b_spline_curve_with_knots ..................................:   6634
+! SUMMARY-  b_spline_surface_with_knots ................................:   3389
+! SUMMARY-  b_spline_surface_with_knots_and_rational_b_spline_surface ..:      2
+! SUMMARY-  cartesian_point ............................................: 106853
+! SUMMARY-  circle .....................................................:   1615
+! SUMMARY-  closed_shell ...............................................:    801
+! SUMMARY-  context_dependent_shape_representation .....................:     29
+! SUMMARY-  cylindrical_surface ........................................:   1114
+! SUMMARY-  direction ..................................................:  30974
+! SUMMARY-  edge_curve .................................................:  23373
+! SUMMARY-  edge_loop ..................................................:   9805
+! SUMMARY-  ellipse ....................................................:    512
+! SUMMARY-  face_bound .................................................:    406
+! SUMMARY-  face_outer_bound ...........................................:   9399
+! SUMMARY-  geometric_representation_context_and_global_uncertainty_a ..:     17
+! SUMMARY-  item_defined_transformation ................................:     29
+! SUMMARY-  length_unit_and_si_unit ....................................:      1
+! SUMMARY-  line .......................................................:  14612
+! SUMMARY-  manifold_solid_brep ........................................:    801
+! SUMMARY-  next_assembly_usage_occurrence .............................:     29
+! SUMMARY-  oriented_edge ..............................................:  46746
+! SUMMARY-  plane ......................................................:   4801
+! SUMMARY-  plane_angle_unit_and_si_unit ...............................:      1
+! SUMMARY-  product ....................................................:     16
+! SUMMARY-  product_context ............................................:      1
+! SUMMARY-  product_definition .........................................:     16
+! SUMMARY-  product_definition_context .................................:      1
+! SUMMARY-  product_definition_formation ...............................:     16
+! SUMMARY-  product_definition_shape ...................................:     45
+! SUMMARY-  product_related_product_category ...........................:     16
+! SUMMARY-  representation_relationship_with_transformation_and_shape ..:     29
+! SUMMARY-  shape_representation .......................................:     16
+! SUMMARY-  si_unit_and_solid_angle_unit ...............................:      1
+! SUMMARY-  spherical_surface ..........................................:      8
+! SUMMARY-  toroidal_surface ...........................................:     85
+! SUMMARY-  uncertainty_measure_with_unit ..............................:     17
+! SUMMARY-  vector .....................................................:  14612
+! SUMMARY-  vertex_point ...............................................:  15562
+! SUMMARY-                                                               -------
+! SUMMARY-  Total                                                         309965
+! STATUS-    
+! STATUS-   Converting to Output Form (Phase 2 of 3): 30-NOV-2022 4:45:34 PM
+! STATUS-    
+! STATUS-    
+! STATUS-   Generating UG geometry and placing them in parts
+! STATUS-    
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:03 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Cap_0603
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     3
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              3
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:04 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Res_512
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:04 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Res_123
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:04 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Res_471
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:04 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Res_102
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:05 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Led_red_0603
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     2
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              2
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:05 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Transistor_smd
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     9
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              9
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:05 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Cap_Tam_106C
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:    14
+! SUMMARY-                                 -----
+! SUMMARY-  Total                             14
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:06 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Cap_Tam_106
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:    14
+! SUMMARY-                                 -----
+! SUMMARY-  Total                             14
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:06 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Diodo_K24
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     8
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              8
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:07 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Push_Bottom
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     9
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              9
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:07 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\cp2102
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:    82
+! SUMMARY-                                 -----
+! SUMMARY-  Total                             82
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:09 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\AMS1173.3V
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:    21
+! SUMMARY-                                 -----
+! SUMMARY-  Total                             21
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:10 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\esp32
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:   147
+! SUMMARY-                                 -----
+! SUMMARY-  Total                            147
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:14 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\MicroUSB
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:46:14 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\PCB_ESP32-38Pines.prt
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Component ...................:    29
+! SUMMARY-  Solid .......................:   457
+! SUMMARY-                                 -----
+! SUMMARY-  Total                            486
+! INFO-      
+! INFO-     Total number of solids input for this translation       :       801
+! INFO-      
+! INFO-     Number of solids created without body validation faults :       801
+! INFO-      
+! INFO-     Number of solids created with body validation fault(s)  :         0
+! INFO-      
+! INFO-     Number of solids ending up as sheet bodies              :         0
+! INFO-      
+! INFO-     End of Translation: 30-NOV-2022  4:46:26 PM
+! INFO-      
+STEP to UG
+! INFO-     NX STEP AP203 - V1926
+! INFO-      
+! INFO-     Start of Translation: 30-NOV-2022  4:48:01 PM
+! INFO-      
+! STATUS-   Converting Part: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\PCB_ESP32-38Pines.step
+! SUMMARY-   
+! SUMMARY-    STEP Header Information
+! SUMMARY-   
+! SUMMARY-  Description      Unknown
+! SUMMARY-  Imp_Level        2;1
+! SUMMARY-  File_Name        C:/Users/CDMX Electrónica/Desktop/PCB_ESP32-38Pines.step
+! SUMMARY-  Date             2020-08-26T17:51:04-05:00
+! SUMMARY-  Author           Unknown
+! SUMMARY-  Organization     Unknown
+! SUMMARY-  Pre_Version      ST-DEVELOPER v18.1
+! SUMMARY-  Orig_System      Autodesk Translation Framework v9.3.0.1241
+! SUMMARY-  Authorization    Unknown
+! SUMMARY-  Schema_ID        automotive_design
+! SUMMARY-   
+! SUMMARY-    Summary of STEP Entities
+! SUMMARY-   
+! SUMMARY-  Entity Type                                                   Count
+! SUMMARY-  -----------                                                   ------
+! SUMMARY-  advanced_face ..............................................:   9399
+! SUMMARY-  application_context ........................................:      1
+! SUMMARY-  axis2_placement_3d .........................................:   8181
+! SUMMARY-  b_spline_curve_with_knots ..................................:   6634
+! SUMMARY-  b_spline_surface_with_knots ................................:   3389
+! SUMMARY-  b_spline_surface_with_knots_and_rational_b_spline_surface ..:      2
+! SUMMARY-  cartesian_point ............................................: 106853
+! SUMMARY-  circle .....................................................:   1615
+! SUMMARY-  closed_shell ...............................................:    801
+! SUMMARY-  context_dependent_shape_representation .....................:     29
+! SUMMARY-  cylindrical_surface ........................................:   1114
+! SUMMARY-  direction ..................................................:  30974
+! SUMMARY-  edge_curve .................................................:  23373
+! SUMMARY-  edge_loop ..................................................:   9805
+! SUMMARY-  ellipse ....................................................:    512
+! SUMMARY-  face_bound .................................................:    406
+! SUMMARY-  face_outer_bound ...........................................:   9399
+! SUMMARY-  geometric_representation_context_and_global_uncertainty_a ..:     17
+! SUMMARY-  item_defined_transformation ................................:     29
+! SUMMARY-  length_unit_and_si_unit ....................................:      1
+! SUMMARY-  line .......................................................:  14612
+! SUMMARY-  manifold_solid_brep ........................................:    801
+! SUMMARY-  next_assembly_usage_occurrence .............................:     29
+! SUMMARY-  oriented_edge ..............................................:  46746
+! SUMMARY-  plane ......................................................:   4801
+! SUMMARY-  plane_angle_unit_and_si_unit ...............................:      1
+! SUMMARY-  product ....................................................:     16
+! SUMMARY-  product_context ............................................:      1
+! SUMMARY-  product_definition .........................................:     16
+! SUMMARY-  product_definition_context .................................:      1
+! SUMMARY-  product_definition_formation ...............................:     16
+! SUMMARY-  product_definition_shape ...................................:     45
+! SUMMARY-  product_related_product_category ...........................:     16
+! SUMMARY-  representation_relationship_with_transformation_and_shape ..:     29
+! SUMMARY-  shape_representation .......................................:     16
+! SUMMARY-  si_unit_and_solid_angle_unit ...............................:      1
+! SUMMARY-  spherical_surface ..........................................:      8
+! SUMMARY-  toroidal_surface ...........................................:     85
+! SUMMARY-  uncertainty_measure_with_unit ..............................:     17
+! SUMMARY-  vector .....................................................:  14612
+! SUMMARY-  vertex_point ...............................................:  15562
+! SUMMARY-                                                               -------
+! SUMMARY-  Total                                                         309965
+! STATUS-    
+! STATUS-   Converting to Output Form (Phase 2 of 3): 30-NOV-2022 4:48:03 PM
+! STATUS-    
+! STATUS-    
+! STATUS-   Generating UG geometry and placing them in parts
+! STATUS-    
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:34 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Cap_0603311019
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     3
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              3
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:35 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Res_512311018
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:35 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Res_123311017
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:35 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Res_471311016
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:35 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Res_102311015
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:36 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Led_red_0603311014
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     2
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              2
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:36 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Transistor_smd311013
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     9
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              9
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:36 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Cap_Tam_106C311012
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:    14
+! SUMMARY-                                 -----
+! SUMMARY-  Total                             14
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:37 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Cap_Tam_106311011
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:    14
+! SUMMARY-                                 -----
+! SUMMARY-  Total                             14
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:37 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Diodo_K24311010
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     8
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              8
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:38 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\Push_Bottom311009
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     9
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              9
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:38 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\cp2102311008
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:    82
+! SUMMARY-                                 -----
+! SUMMARY-  Total                             82
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:40 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\AMS1173.3V311007
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:    21
+! SUMMARY-                                 -----
+! SUMMARY-  Total                             21
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:41 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\esp32311006
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:   147
+! SUMMARY-                                 -----
+! SUMMARY-  Total                            147
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:45 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\MicroUSB311005
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     7
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              7
+! STATUS-   Creating the UG part (Phase 3 of 3): 30-NOV-2022  4:48:46 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Box\RU Rensselaer Rocket Society\Shuttle Tracker\PCB_ESP32-38Pines.prt
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Component ...................:    29
+! SUMMARY-  Solid .......................:   457
+! SUMMARY-                                 -----
+! SUMMARY-  Total                            486
+! INFO-      
+! INFO-     Total number of solids input for this translation       :       801
+! INFO-      
+! INFO-     Number of solids created without body validation faults :       801
+! INFO-      
+! INFO-     Number of solids created with body validation fault(s)  :         0
+! INFO-      
+! INFO-     Number of solids ending up as sheet bodies              :         0
+! INFO-      
+! INFO-     End of Translation: 30-NOV-2022  4:49:01 PM
+! INFO-      
