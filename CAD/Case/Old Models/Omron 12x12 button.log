@@ -1,0 +1,123 @@
+﻿STEP to UG
+! INFO-     NX STEP AP203 - V1926
+! INFO-      
+! INFO-     Start of Translation: 27-NOV-2022  9:58:27 PM
+! INFO-      
+! STATUS-   Converting Part: C:\Users\woffos\Desktop\shuttle-tracker\Omron 12x12 button.stp
+! SUMMARY-   
+! SUMMARY-    STEP Header Information
+! SUMMARY-   
+! SUMMARY-  Description      Unknown
+! SUMMARY-  Imp_Level        2;1
+! SUMMARY-  File_Name        E:\_WORK\B_PROIECTE\iNVENTOR\Video switcher\_Pentru grabcad\Omron 12x12 button\Omron 12x12 button.stp
+! SUMMARY-  Date             2018-01-24T22:12:33+02:00
+! SUMMARY-  Author           Cristian
+! SUMMARY-  Organization     Unknown
+! SUMMARY-  Pre_Version      ST-DEVELOPER v16.13
+! SUMMARY-  Orig_System      Autodesk Inventor 2018
+! SUMMARY-  Authorization    Unknown
+! SUMMARY-  Schema_ID        automotive_design
+! SUMMARY-   
+! SUMMARY-    Summary of STEP Entities
+! SUMMARY-   
+! SUMMARY-  Entity Type                                                   Count
+! SUMMARY-  -----------                                                   ------
+! SUMMARY-  advanced_face ..............................................:    157
+! SUMMARY-  application_context ........................................:      1
+! SUMMARY-  axis2_placement_3d .........................................:    242
+! SUMMARY-  cartesian_point ............................................:    720
+! SUMMARY-  circle .....................................................:     78
+! SUMMARY-  closed_shell ...............................................:      7
+! SUMMARY-  context_dependent_shape_representation .....................:      3
+! SUMMARY-  conversion_based_unit_and_length_unit ......................:      1
+! SUMMARY-  cylindrical_surface ........................................:     36
+! SUMMARY-  dimensional_exponents ......................................:      1
+! SUMMARY-  direction ..................................................:    740
+! SUMMARY-  edge_curve .................................................:    334
+! SUMMARY-  edge_loop ..................................................:    188
+! SUMMARY-  face_bound .................................................:     31
+! SUMMARY-  face_outer_bound ...........................................:    157
+! SUMMARY-  geometric_representation_context_and_global_uncertainty_a ..:      5
+! SUMMARY-  item_defined_transformation ................................:      3
+! SUMMARY-  length_measure_with_unit ...................................:      1
+! SUMMARY-  length_unit_and_si_unit ....................................:      1
+! SUMMARY-  line .......................................................:    256
+! SUMMARY-  manifold_solid_brep ........................................:      7
+! SUMMARY-  next_assembly_usage_occurrence .............................:      3
+! SUMMARY-  oriented_edge ..............................................:    668
+! SUMMARY-  plane ......................................................:    107
+! SUMMARY-  plane_angle_unit_and_si_unit ...............................:      1
+! SUMMARY-  product ....................................................:      4
+! SUMMARY-  product_context ............................................:      1
+! SUMMARY-  product_definition .........................................:      4
+! SUMMARY-  product_definition_context .................................:      1
+! SUMMARY-  product_definition_formation ...............................:      4
+! SUMMARY-  product_definition_shape ...................................:      7
+! SUMMARY-  product_related_product_category ...........................:      4
+! SUMMARY-  representation_relationship_with_transformation_and_shape ..:      3
+! SUMMARY-  shape_representation .......................................:      4
+! SUMMARY-  si_unit_and_solid_angle_unit ...............................:      1
+! SUMMARY-  spherical_surface ..........................................:      8
+! SUMMARY-  toroidal_surface ...........................................:      6
+! SUMMARY-  uncertainty_measure_with_unit ..............................:      5
+! SUMMARY-  vector .....................................................:    256
+! SUMMARY-  vertex_point ...............................................:    222
+! SUMMARY-                                                               -------
+! SUMMARY-  Total                                                           4278
+! STATUS-    
+! STATUS-   Converting to Output Form (Phase 2 of 3): 27-NOV-2022 9:58:28 PM
+! STATUS-    
+! STATUS-    
+! STATUS-   Generating UG geometry and placing them in parts
+! STATUS-    
+! STATUS-   Creating the UG part (Phase 3 of 3): 27-NOV-2022  9:58:28 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Desktop\shuttle-tracker\Buton-1212_Baza
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     5
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              5
+! STATUS-   Creating the UG part (Phase 3 of 3): 27-NOV-2022  9:58:29 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Desktop\shuttle-tracker\Buton-1212_capac
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     1
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              1
+! STATUS-   Creating the UG part (Phase 3 of 3): 27-NOV-2022  9:58:29 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Desktop\shuttle-tracker\Buton-1212_capac-intermediar
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:     1
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              1
+! STATUS-   Creating the UG part (Phase 3 of 3): 27-NOV-2022  9:58:29 PM
+! INFO-     Filing Part ..: C:\Users\woffos\Desktop\shuttle-tracker\Omron 12x12 button.prt
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Component ...................:     3
+! SUMMARY-                                 -----
+! SUMMARY-  Total                              3
+! INFO-      
+! INFO-     Total number of solids input for this translation       :         7
+! INFO-      
+! INFO-     Number of solids created without body validation faults :         7
+! INFO-      
+! INFO-     Number of solids created with body validation fault(s)  :         0
+! INFO-      
+! INFO-     Number of solids ending up as sheet bodies              :         0
+! INFO-      
+! INFO-     End of Translation: 27-NOV-2022  9:58:29 PM
+! INFO-      

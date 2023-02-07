@@ -1,0 +1,89 @@
+﻿STEP to UG
+! INFO-     NX STEP AP203 - V1926
+! INFO-      
+! INFO-     Start of Translation: 1-FEB-2023  10:27:11 AM
+! INFO-      
+! STATUS-   Converting Part: C:\Users\woffos\Desktop\projects\shuttle-tracker\Shuttle-Tracker-Node\CAD\PCB\Footprints, Models, & Symbols\ESP32-C3-DEVKITC-02\ESP32-C3-DEVKITC-02.step
+! SUMMARY-   
+! SUMMARY-    STEP Header Information
+! SUMMARY-   
+! SUMMARY-  Description      STEP AP214
+! SUMMARY-  Imp_Level        1
+! SUMMARY-  File_Name        ESP32-C3-DevKitC-02.STEP
+! SUMMARY-  Date             2022-02-18T18:09:42
+! SUMMARY-  Author           Unknown
+! SUMMARY-  Organization     Unknown
+! SUMMARY-  Pre_Version      SwSTEP 2.0
+! SUMMARY-  Orig_System      SolidWorks 2017
+! SUMMARY-  Authorization    Unknown
+! SUMMARY-  Schema_ID        automotive_design
+! SUMMARY-   
+! SUMMARY-    Summary of STEP Entities
+! SUMMARY-   
+! SUMMARY-  Entity Type                                                   Count
+! SUMMARY-  -----------                                                   ------
+! SUMMARY-  advanced_face ..............................................:   2684
+! SUMMARY-  application_context ........................................:      2
+! SUMMARY-  axis2_placement_3d .........................................:   3531
+! SUMMARY-  b_spline_curve_with_knots ..................................:     22
+! SUMMARY-  b_spline_curve_with_knots_and_rational_b_spline_curve ......:     16
+! SUMMARY-  b_spline_surface_with_knots ................................:      8
+! SUMMARY-  cartesian_point ............................................:  13879
+! SUMMARY-  circle .....................................................:    854
+! SUMMARY-  closed_shell ...............................................:    158
+! SUMMARY-  conical_surface ............................................:      2
+! SUMMARY-  cylindrical_surface ........................................:    442
+! SUMMARY-  direction ..................................................:  12756
+! SUMMARY-  edge_curve .................................................:   6586
+! SUMMARY-  edge_loop ..................................................:   2894
+! SUMMARY-  face_bound .................................................:    210
+! SUMMARY-  face_outer_bound ...........................................:   2684
+! SUMMARY-  geometric_representation_context_and_global_uncertainty_a ..:   2844
+! SUMMARY-  length_unit_and_si_unit ....................................:   2844
+! SUMMARY-  line .......................................................:   5694
+! SUMMARY-  manifold_solid_brep ........................................:    158
+! SUMMARY-  oriented_edge ..............................................:  13172
+! SUMMARY-  plane ......................................................:   2218
+! SUMMARY-  plane_angle_unit_and_si_unit ...............................:   2844
+! SUMMARY-  product ....................................................:      1
+! SUMMARY-  product_context ............................................:      1
+! SUMMARY-  product_definition .........................................:      1
+! SUMMARY-  product_definition_context .................................:      1
+! SUMMARY-  product_definition_formation_with_specified_source .........:      1
+! SUMMARY-  product_definition_shape ...................................:      1
+! SUMMARY-  product_related_product_category ...........................:      1
+! SUMMARY-  si_unit_and_solid_angle_unit ...............................:   2844
+! SUMMARY-  spherical_surface ..........................................:      8
+! SUMMARY-  toroidal_surface ...........................................:      6
+! SUMMARY-  uncertainty_measure_with_unit ..............................:   2844
+! SUMMARY-  vector .....................................................:   5694
+! SUMMARY-  vertex_point ...............................................:   4218
+! SUMMARY-                                                               -------
+! SUMMARY-  Total                                                          92123
+! STATUS-    
+! STATUS-   Converting to Output Form (Phase 2 of 3): 1-FEB-2023 10:27:12 AM
+! STATUS-    
+! STATUS-    
+! STATUS-   Generating UG geometry and placing them in parts
+! STATUS-    
+! STATUS-   Creating the UG part (Phase 3 of 3): 1-FEB-2023  10:27:18 AM
+! INFO-     Filing Part ..: C:\Users\woffos\Desktop\projects\shuttle-tracker\Shuttle-Tracker-Node\CAD\Case\ESP32-C3-DEVKITC-02.prt
+! SUMMARY-   
+! SUMMARY-  Summary of Unigraphics Part Entities
+! SUMMARY-   
+! SUMMARY-  Entities Processed             Count
+! SUMMARY-  ------------------             -----
+! SUMMARY-  Solid .......................:   158
+! SUMMARY-                                 -----
+! SUMMARY-  Total                            158
+! INFO-      
+! INFO-     Total number of solids input for this translation       :       158
+! INFO-      
+! INFO-     Number of solids created without body validation faults :       158
+! INFO-      
+! INFO-     Number of solids created with body validation fault(s)  :         0
+! INFO-      
+! INFO-     Number of solids ending up as sheet bodies              :         0
+! INFO-      
+! INFO-     End of Translation: 1-FEB-2023  10:27:25 AM
+! INFO-      
