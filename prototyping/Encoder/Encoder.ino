@@ -65,6 +65,7 @@
     attachInterrupt(encoderPin2, updateEncoder, CHANGE);
 
     pinMode(buttonPin, INPUT_PULLUP);
+    pinMode(7, INPUT_PULLDOWN);
     attachInterrupt(digitalPinToInterrupt(buttonPin), updateButton, CHANGE);
 
   }
