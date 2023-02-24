@@ -17,4 +17,4 @@ upload:
 	arduino-cli upload -b esp32:esp32:esp32c3 -p $(variable) $(filter-out $@,$(MAKECMDGOALS))
 
 monitor:
-	arduino-cli monitor -p $(variable) -c baudrate115200
+	arduino-cli monitor -p $(variable) -c baudrate=115200
