@@ -51,10 +51,10 @@ void setup() {
   attachInterrupt(pin_row_3, updateKeypad, CHANGE);
   attachInterrupt(pin_row_4, updateKeypad, CHANGE);
 
-  attachInterrupt(pin_col_1, updateKeypad, CHANGE);
-  attachInterrupt(pin_row_2, updateKeypad, CHANGE);
-  attachInterrupt(pin_row_3, updateKeypad, CHANGE);
-  
+  // attachInterrupt(pin_col_1, updateKeypad, CHANGE);
+  // attachInterrupt(pin_row_2, updateKeypad, CHANGE);
+  // attachInterrupt(pin_row_3, updateKeypad, CHANGE);
+
 }
 
 void loop() {
