@@ -20,6 +20,7 @@ void IRAM_ATTR updateKeypad(){
   Serial.println("MEOW");
   int time = millis();
   if (time - bounceing[0][0] < bounce_interval) return;
+  bounceing[0][0] = time;
   for(int i = 0; i < 3; ++i){
     if (digitalRead(cols[i]) == HIGH) continue;
     pinMode(rows[i], OUTPUT);
