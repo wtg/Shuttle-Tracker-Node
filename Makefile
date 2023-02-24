@@ -1,7 +1,7 @@
 setup:
 ifeq ("$(wildcard $(.port.txt))","")
 	touch .port.txt
-	echo "Type serial port into port.txt"
+	echo "Type serial port into .port.txt"
 endif
 
 file := .port.txt
