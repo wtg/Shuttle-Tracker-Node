@@ -1,14 +1,14 @@
 const int cols[4] = {3,2,1,0};
 const int rows[3] = {6,5,4};
 
-const int bounce_interval = 100;
+const int bounce_interval = 200;
 const char button_vals[3][4] = {
   {'1','2','3','#'},
   {'4','5','6','*'},
   {'7','8','9','0'}
 };
 
-volatile int bounceing[3][4] = {
+volatile unsigned long bounceing[3][4] = {
   {0,0,0,0},
   {0,0,0,0},
   {0,0,0,0}
@@ -17,9 +17,11 @@ volatile int bounceing[3][4] = {
 volatile char last = ' ';
 volatile int changed = 0;
 void IRAM_ATTR updateKeypad(){
-  Serial.println("MEOW");
-  int time = millis();
+  unsigned long time = millis();
   if (time - bounceing[0][0] < bounce_interval) return;
+  char buffer[100];
+  sprintf(buffer, "%d | %d | %d", time - bounceing[0][0], bounceing[0][0], time);
+  Serial.println(buffer);
   bounceing[0][0] = time;
   for(int i = 0; i < 3; ++i){
     if (digitalRead(cols[i]) == HIGH) continue;
@@ -32,11 +34,6 @@ void IRAM_ATTR updateKeypad(){
       }
       pinMode(cols[i], OUTPUT);
       digitalWrite(cols[i], LOW);
-      /* if(rows[i] == HIGH && cols[j] == LOW && time - bounceing[j][i] > bounce_interval){ */
-      /*   last = Serial.println(button_vals[j][i]); */
-      /*   changed = 1; */
-      /*   bounceing[j][i] = time; */
-      /* } */
     }
     pinMode(rows[i], INPUT_PULLUP);
   }
@@ -62,10 +59,10 @@ void setup() {
   /* attachInterrupt(pin_row_3, updateKeypad, CHANGE); */
   /* attachInterrupt(pin_row_4, updateKeypad, CHANGE); */
 
-  attachInterrupt(rows[0], updateKeypad, CHANGE);
-  attachInterrupt(rows[1], updateKeypad, CHANGE);
-  attachInterrupt(rows[2], updateKeypad, CHANGE);
-  
+  attachInterrupt(rows[0], updateKeypad, LOW);
+  attachInterrupt(rows[1], updateKeypad, LOW);
+  attachInterrupt(rows[2], updateKeypad, LOW);
+
 }
 
 void loop() {
@@ -75,7 +72,9 @@ void loop() {
     Serial.println();
   }
   else{
-    Serial.println("no");
+    char buffer[100];
+    sprintf(buffer, "no: %d", millis());
+    /* Serial.println(buffer); */
   }
-  delay(400);
+  delay(100);
 }
