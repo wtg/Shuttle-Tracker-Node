@@ -16,15 +16,19 @@
   volatile long buttonValue = 0;
   volatile int buttonHeld = 0;
 
-  long lastencoderValue = 0;
-
   int lastMSB = 0;
   int lastLSB = 0;
+
+  const int debounce_interval = 200;
 
   void IRAM_ATTR updateEncoder(){
     int MSB = digitalRead(encoderPin1); //MSB = most significant bit
     int LSB = digitalRead(encoderPin2); //LSB = least significant bit
 
+    static unsigned long last_encoder_time = 0;
+    unsigned long interrupt_time = millis();
+    if (interrupt_time - last_interrupt_time < debounce_interval ){return;}
+    last_encoder_time = interrupt_time;
     int encoded = (MSB << 1) | LSB; //converting the 2 pin value to single number
     int sum  = (lastEncoded << 2) | encoded; //adding it to the previous encoded value
 
@@ -43,7 +47,6 @@
 
   void IRAM_ATTR updateButton(){
     static unsigned long last_interrupt_time = 0;
-    const int debounce_interval = 200;
     unsigned long interrupt_time = millis();
 
     if (interrupt_time - last_interrupt_time > debounce_interval ){
