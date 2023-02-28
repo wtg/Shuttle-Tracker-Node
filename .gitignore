@@ -1,2 +1,6 @@
 .DS_Store
 fp-info-cache
+.port.txt
+debug.cfg
+debug_custom.json
+esp32c3.svd
