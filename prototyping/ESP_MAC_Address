@@ -1,0 +1,18 @@
+#include <WiFi.h>
+
+//uint8_t masterCustomMac[] = {...}
+
+void setup() {
+  Serial.begin(115300);
+  delay(10);
+  Serial.println();
+  WiFi.disconnect(true); //disconnect formal wifi to set new wifi connection
+  WiFi.mode(WIFI_STA); //init wifi mode
+  //esp_wifi_set_mac(ESP_IF_WIFI_STA, &masterCustmMac[0]);
+  Serial.print("MAC >> ");  
+  Serial.println(WiFi.macAddress());
+}
+
+void loop() {
+  delay(1);
+}
