@@ -7,7 +7,7 @@ Display::Display(){
 		Serial.println("Error: Failed to init backpack. Check wiring.");
 		// TODO: Flash RGB LED a certain color to indicate error state?
 	}
-	lcd.setBacklight(HIGH);
+	backlightOn();
 
 }
 
@@ -25,6 +25,8 @@ void Display::init(){
 
 void Display::rotaryRight(){
 
+	if(startBacklight()) return;
+
 	if(currentMenu == HOME){
 		if(currentNavOption < N_NAV_STATES - 1){
 			++currentNavOption;
@@ -36,6 +38,8 @@ void Display::rotaryRight(){
 
 void Display::rotaryLeft(){
 
+	if(startBacklight()) return;
+
 	if(currentMenu == HOME){
 		if(currentNavOption > 0){
 			--currentNavOption;
@@ -46,6 +50,8 @@ void Display::rotaryLeft(){
 }
 
 void Display::rotarySelect(){
+
+	if(startBacklight()) return;
 
 	switch(currentMenu){
 		case HOME:
@@ -75,6 +81,8 @@ void Display::rotarySelect(){
 
 void Display::keypadPress(char digit){
 
+	if(startBacklight()) return;
+
 	if(currentMenu == BUS_ENTRY){
 
 		if(busEntryPos < BUS_ID_SIZE){
@@ -90,6 +98,8 @@ void Display::keypadPress(char digit){
 }
 
 void Display::backspace(){
+
+	if(startBacklight()) return;
 
 	if(currentMenu == BUS_ENTRY){
 
@@ -109,11 +119,22 @@ void Display::backspace(){
 
 void Display::back(){
 
+	if(startBacklight()) return;
+
 	if(currentMenu == HOME){
 		currentNavOption = NAV_STATE_NONE;
 		render();
 	}else{
 		navigateTo(HOME);
+	}
+
+}
+
+void Display::loop(){
+
+	// Shut off backlight if past timeout
+	if(millis() - backlightTimer > backlightTimeout){
+		backlightOff();
 	}
 
 }
@@ -183,5 +204,29 @@ void Display::setDisplay(const char* string){
 	char second_line[17];
 	memcpy(second_line, &string[17], 17);
 	lcd.print(second_line);
+
+}
+
+void Display::backlightOn(){
+	lcd.setBacklight(HIGH);
+	backlightState = true;
+}
+
+void Display::backlightOff(){
+	lcd.setBacklight(LOW);
+	backlightState = false;
+}
+
+bool Display::startBacklight(){
+
+	backlightTimer = millis();
+
+	// Turn on backlight if input is received, but do not respond until next input within timeout
+	if(!backlightState){
+		backlightOn();
+		return true;
+	}else{
+		return false;
+	}
 
 }

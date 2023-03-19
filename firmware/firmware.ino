@@ -8,4 +8,5 @@ void setup(){
 
 void loop(){
 	IO::get_instance().loop();
+	Display::get_instance().loop();
 }

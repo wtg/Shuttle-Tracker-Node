@@ -50,6 +50,11 @@ class Display {
 	int battery = 0;
 	bool btEnable = true;
 
+	// Backlight timeout
+	const int backlightTimeout = 30000;
+	unsigned long backlightTimer = millis();
+	bool backlightState = true;
+
 	// Private constructor for singleton
 	Display();
 
@@ -68,6 +73,9 @@ public:
 	void backspace();
 	void back();
 
+	// Called from the main loop function
+	void loop();
+
 private:
 	// Control operations
 	void setBusID(const char* id);
@@ -81,5 +89,12 @@ private:
 
 	// Display a string on the actual hardware display
 	void setDisplay(const char* string);
+
+	// Backlight control
+	void backlightOn();
+	void backlightOff();
+
+	// Turn on backlight in response to input
+	bool startBacklight();
 
 };
