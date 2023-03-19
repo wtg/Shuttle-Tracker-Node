@@ -177,12 +177,6 @@ void Display::render(){
 
 void Display::setDisplay(const char* string){
 
-	// std::cout << "----------------" << std::endl;
-	//std::cout << string << std::endl;
-	//std::cout << "----------------" << std::endl/* << std::endl*/
-
-	//Serial.println(string);
-
 	lcd.setCursor(0, 0);
 	lcd.print(string);
 	lcd.setCursor(0, 1);
