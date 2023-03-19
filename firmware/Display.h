@@ -57,6 +57,9 @@ public:
 	// Get the single instance
 	static Display& get_instance();
 
+	// Initialize Display
+	void init();
+
 	// Input operations
 	void rotaryRight();
 	void rotaryLeft();

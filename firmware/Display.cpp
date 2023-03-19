@@ -16,6 +16,13 @@ Display& Display::get_instance(){
 	return instance;
 }
 
+void Display::init(){
+
+	// Render on boot to display initial state and overwrite anything displayed from previous boot
+	render();
+
+}
+
 void Display::rotaryRight(){
 
 	if(currentMenu == HOME){
@@ -104,6 +111,7 @@ void Display::back(){
 
 	if(currentMenu == HOME){
 		currentNavOption = NAV_STATE_NONE;
+		render();
 	}else{
 		navigateTo(HOME);
 	}
