@@ -106,7 +106,7 @@ void Display::backspace(){
 	if(currentMenu == BUS_ENTRY){
 
 		if(busEntryPos > 0){
-			if(busEntryPos < BUS_ID_SIZE){
+			if(busEntryPos <= BUS_ID_SIZE){
 				busEntryID[busEntryPos] = ' ';
 			}
 			--busEntryPos;
@@ -166,7 +166,7 @@ void Display::render(){
 
 	// Display bus ID
 	if(!Beacon::get_instance().enabled()){
-		SNPRINTF_NO_TERM(output, 10, "#%-3d  NoBT", Beacon::get_instance().getBusID())
+		SNPRINTF_NO_TERM(output, 11, "#%-3d BT Off", Beacon::get_instance().getBusID())
 	}else{
 		SNPRINTF_NO_TERM(output, 9, "Bus #%-3d", Beacon::get_instance().getBusID())
 	}
@@ -186,11 +186,11 @@ void Display::render(){
 			SNPRINTF_NO_TERM(&output[20], 10, "%-.10s", navStateStrings[currentNavOption])
 			break;
 		case BUS_ENTRY:
-		SNPRINTF_NO_TERM(output, 12, "Enter Bus   ")
+			SNPRINTF_NO_TERM(output, 12, "Enter Bus   ")
 			SNPRINTF_NO_TERM(&output[17], 1 + BUS_ID_SIZE + 1, "#%s", busEntryID)
 			break;
 		case WIFI_STATUS:
-		SNPRINTF_NO_TERM(&output[17], 15, "129.161.000.000")
+			SNPRINTF_NO_TERM(&output[17], 15, "129.161.000.000")
 			break;
 	}
 
