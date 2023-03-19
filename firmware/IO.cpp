@@ -94,7 +94,7 @@ void IO::serialCommandParser(){
 
 	if(Serial.available() > 0){
 
-		char buffer[16];
+		char buffer[16] = {};
 		Serial.readBytesUntil('\n', buffer, 16);
 
 		if(!strcmp("right", buffer)){
