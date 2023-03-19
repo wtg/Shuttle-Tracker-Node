@@ -39,4 +39,8 @@ private:
 	void IRAM_ATTR updateEncoder();
 	void IRAM_ATTR updateButton();
 
+	// Parse and run serial commands
+	void serialCommandParser();
+	// TODO: Disable in production?
+
 };

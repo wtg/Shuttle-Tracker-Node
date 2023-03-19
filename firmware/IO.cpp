@@ -38,6 +38,9 @@ void IO::loop(){
 		lastButtonCount = buttonValue;
 	}
 
+	// Parse and run serial commands
+	serialCommandParser();
+
 }
 
 void IO::isrUpdateEncoder(){
@@ -83,6 +86,40 @@ void IRAM_ATTR IO::updateButton(){
 			lastButton = cvalue;
 			last_interrupt_time = interrupt_time;
 		}
+	}
+
+}
+
+void IO::serialCommandParser(){
+
+	if(Serial.available() > 0){
+
+		char buffer[16];
+		Serial.readBytesUntil('\n', buffer, 16);
+
+		if(!strcmp("right", buffer)){
+			Serial.println("Serial Command: right");
+			Display::get_instance().rotaryRight();
+		}else if(!strcmp("left", buffer)){
+			Serial.println("Serial Command: left");
+			Display::get_instance().rotaryLeft();
+		}else if(!strcmp("select", buffer)){
+			Serial.println("Serial Command: select");
+			Display::get_instance().rotarySelect();
+		}else if(!strcmp("back", buffer)){
+			Serial.println("Serial Command: back");
+			Display::get_instance().back();
+		}else if(!strcmp("backspace", buffer)){
+			Serial.println("Serial Command: backspace");
+			Display::get_instance().backspace();
+		}
+
+		if(isdigit(buffer[0])){
+			Serial.print("Serial Command: digit ");
+			Serial.println(buffer[0]);
+			Display::get_instance().keypadPress(buffer[0]);
+		}
+
 	}
 
 }
