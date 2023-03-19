@@ -1,4 +1,5 @@
 #include "Display.h"
+#include "Battery.h"
 
 Display::Display(){
 
@@ -170,7 +171,7 @@ void Display::render(){
 	}
 
 	// Display battery percentage
-	SNPRINTF_NO_TERM(&output[12], 4, "%3d%%", battery)
+	SNPRINTF_NO_TERM(&output[12], 4, "%3d%%", Battery::get_instance().getPercentage())
 
 	// Display stuff depending on current menu state
 	switch(currentMenu){

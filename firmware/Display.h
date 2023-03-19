@@ -47,7 +47,6 @@ class Display {
 
 	// Store states
 	int busID = 0;
-	int battery = 0;
 	bool btEnable = true;
 
 	// Backlight timeout
@@ -76,6 +75,9 @@ public:
 	// Called from the main loop function
 	void loop();
 
+	// Build the string that should currently be shown
+	void render();
+
 private:
 	// Control operations
 	void setBusID(const char* id);
@@ -83,9 +85,6 @@ private:
 
 	// Switch to a different menu state
 	void navigateTo(menuState menuState);
-
-	// Build the string that should currently be shown
-	void render();
 
 	// Display a string on the actual hardware display
 	void setDisplay(const char* string);
