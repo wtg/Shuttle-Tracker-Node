@@ -45,10 +45,6 @@ class Display {
 	char busEntryID[BUS_ID_SIZE+2] = "_  ";
 	int busEntryPos = 0;
 
-	// Store states
-	int busID = 0;
-	bool btEnable = true;
-
 	// Backlight timeout
 	const int backlightTimeout = 30000;
 	unsigned long backlightTimer = millis();

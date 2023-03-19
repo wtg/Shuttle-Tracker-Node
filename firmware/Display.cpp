@@ -1,5 +1,6 @@
 #include "Display.h"
 #include "Battery.h"
+#include "Beacon.h"
 
 Display::Display(){
 
@@ -141,11 +142,11 @@ void Display::loop(){
 }
 
 void Display::setBusID(const char *id){
-	busID = atoi(id);
+	Beacon::get_instance().setBusID(atoi(id));
 }
 
 void Display::toggleBT(){
-	btEnable = !btEnable;
+	Beacon::get_instance().toggle();
 	render();
 }
 
@@ -164,10 +165,10 @@ void Display::render(){
 	char output[34] = "                \n                ";
 
 	// Display bus ID
-	if(!btEnable){
-		SNPRINTF_NO_TERM(output, 10, "#%-3d  NoBT", busID)
+	if(!Beacon::get_instance().enabled()){
+		SNPRINTF_NO_TERM(output, 10, "#%-3d  NoBT", Beacon::get_instance().getBusID())
 	}else{
-		SNPRINTF_NO_TERM(output, 9, "Bus #%-3d", busID)
+		SNPRINTF_NO_TERM(output, 9, "Bus #%-3d", Beacon::get_instance().getBusID())
 	}
 
 	// Display battery percentage

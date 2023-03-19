@@ -1,4 +1,5 @@
 #include "Battery.h"
+#include "Beacon.h"
 #include "Display.h"
 #include "IO.h"
 
@@ -10,5 +11,6 @@ void setup(){
 void loop(){
 	IO::get_instance().loop();
 	Display::get_instance().loop();
+	Beacon::get_instance().loop();
 	Battery::get_instance().loop();
 }
