@@ -5,9 +5,9 @@
 class IO {
 
 	// IO Pin Assignments
-	const int encoderButtonPin = 6;
-	const int encoderPin1 = 7;
-	const int encoderPin2 = 9;
+	const int encoderButtonPin = 10;
+	const int encoderPin1 = 9;
+	const int encoderPin2 = 20;
 
 	// Track Encoder and Button Inputs
 	volatile int lastEncoded = 0;

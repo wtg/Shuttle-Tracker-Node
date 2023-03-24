@@ -5,8 +5,8 @@
 class Display {
 
     // IO Pin Assignments
-    const int displayDataPin = 18;
-    const int displayClockPin = 19;
+    const int displayClockPin = 18;
+    const int displayDataPin = 19;
 
 	// Menu States (The different screens to navigate between)
 	enum menuState {

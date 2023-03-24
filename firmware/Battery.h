@@ -10,7 +10,7 @@ class Battery {
 	unsigned long lastReadingTime = 0;
 
 	// Resistor values for voltage divider
-	const int R1 = 22000;// R1 between battery and ESP
+	const int R1 = 51000;// R1 between battery and ESP
 	const int R2 = 51000;// R2 between ESP and ground
 
 	// Battery Parameters
