@@ -45,10 +45,10 @@ class Display {
 	char busEntryID[BUS_ID_SIZE+2] = "_  ";
 	int busEntryPos = 0;
 
-	// Store states
-	int busID = 0;
-	int battery = 0;
-	bool btEnable = true;
+	// Backlight timeout
+	const int backlightTimeout = 30000;
+	unsigned long backlightTimer = millis();
+	bool backlightState = true;
 
 	// Private constructor for singleton
 	Display();
@@ -56,6 +56,9 @@ class Display {
 public:
 	// Get the single instance
 	static Display& get_instance();
+
+	// Initialize Display
+	void init();
 
 	// Input operations
 	void rotaryRight();
@@ -65,6 +68,12 @@ public:
 	void backspace();
 	void back();
 
+	// Called from the main loop function
+	void loop();
+
+	// Build the string that should currently be shown
+	void render();
+
 private:
 	// Control operations
 	void setBusID(const char* id);
@@ -73,10 +82,14 @@ private:
 	// Switch to a different menu state
 	void navigateTo(menuState menuState);
 
-	// Build the string that should currently be shown
-	void render();
-
 	// Display a string on the actual hardware display
 	void setDisplay(const char* string);
+
+	// Backlight control
+	void backlightOn();
+	void backlightOff();
+
+	// Turn on backlight in response to input
+	bool startBacklight();
 
 };

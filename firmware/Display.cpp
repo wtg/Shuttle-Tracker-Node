@@ -1,4 +1,6 @@
 #include "Display.h"
+#include "Battery.h"
+#include "Beacon.h"
 
 Display::Display(){
 
@@ -7,7 +9,7 @@ Display::Display(){
 		Serial.println("Error: Failed to init backpack. Check wiring.");
 		// TODO: Flash RGB LED a certain color to indicate error state?
 	}
-	lcd.setBacklight(HIGH);
+	backlightOn();
 
 }
 
@@ -16,7 +18,16 @@ Display& Display::get_instance(){
 	return instance;
 }
 
+void Display::init(){
+
+	// Render on boot to display initial state and overwrite anything displayed from previous boot
+	render();
+
+}
+
 void Display::rotaryRight(){
+
+	if(startBacklight()) return;
 
 	if(currentMenu == HOME){
 		if(currentNavOption < N_NAV_STATES - 1){
@@ -29,6 +40,8 @@ void Display::rotaryRight(){
 
 void Display::rotaryLeft(){
 
+	if(startBacklight()) return;
+
 	if(currentMenu == HOME){
 		if(currentNavOption > 0){
 			--currentNavOption;
@@ -39,6 +52,8 @@ void Display::rotaryLeft(){
 }
 
 void Display::rotarySelect(){
+
+	if(startBacklight()) return;
 
 	switch(currentMenu){
 		case HOME:
@@ -68,6 +83,8 @@ void Display::rotarySelect(){
 
 void Display::keypadPress(char digit){
 
+	if(startBacklight()) return;
+
 	if(currentMenu == BUS_ENTRY){
 
 		if(busEntryPos < BUS_ID_SIZE){
@@ -84,10 +101,12 @@ void Display::keypadPress(char digit){
 
 void Display::backspace(){
 
+	if(startBacklight()) return;
+
 	if(currentMenu == BUS_ENTRY){
 
 		if(busEntryPos > 0){
-			if(busEntryPos < BUS_ID_SIZE){
+			if(busEntryPos <= BUS_ID_SIZE){
 				busEntryID[busEntryPos] = ' ';
 			}
 			--busEntryPos;
@@ -102,20 +121,32 @@ void Display::backspace(){
 
 void Display::back(){
 
+	if(startBacklight()) return;
+
 	if(currentMenu == HOME){
 		currentNavOption = NAV_STATE_NONE;
+		render();
 	}else{
 		navigateTo(HOME);
 	}
 
 }
 
+void Display::loop(){
+
+	// Shut off backlight if past timeout
+	if(millis() - backlightTimer > backlightTimeout){
+		backlightOff();
+	}
+
+}
+
 void Display::setBusID(const char *id){
-	busID = atoi(id);
+	Beacon::get_instance().setBusID(atoi(id));
 }
 
 void Display::toggleBT(){
-	btEnable = !btEnable;
+	Beacon::get_instance().toggle();
 	render();
 }
 
@@ -134,14 +165,14 @@ void Display::render(){
 	char output[34] = "                \n                ";
 
 	// Display bus ID
-	if(!btEnable){
-		SNPRINTF_NO_TERM(output, 10, "#%-3d  NoBT", busID)
+	if(!Beacon::get_instance().enabled()){
+		SNPRINTF_NO_TERM(output, 11, "#%-3d BT Off", Beacon::get_instance().getBusID())
 	}else{
-		SNPRINTF_NO_TERM(output, 9, "Bus #%-3d", busID)
+		SNPRINTF_NO_TERM(output, 9, "Bus #%-3d", Beacon::get_instance().getBusID())
 	}
 
 	// Display battery percentage
-	SNPRINTF_NO_TERM(&output[12], 4, "%3d%%", battery)
+	SNPRINTF_NO_TERM(&output[12], 4, "%3d%%", Battery::get_instance().getPercentage())
 
 	// Display stuff depending on current menu state
 	switch(currentMenu){
@@ -155,11 +186,11 @@ void Display::render(){
 			SNPRINTF_NO_TERM(&output[20], 10, "%-.10s", navStateStrings[currentNavOption])
 			break;
 		case BUS_ENTRY:
-		SNPRINTF_NO_TERM(output, 12, "Enter Bus   ")
+			SNPRINTF_NO_TERM(output, 12, "Enter Bus   ")
 			SNPRINTF_NO_TERM(&output[17], 1 + BUS_ID_SIZE + 1, "#%s", busEntryID)
 			break;
 		case WIFI_STATUS:
-		SNPRINTF_NO_TERM(&output[17], 15, "129.161.000.000")
+			SNPRINTF_NO_TERM(&output[17], 15, "129.161.000.000")
 			break;
 	}
 
@@ -169,17 +200,35 @@ void Display::render(){
 
 void Display::setDisplay(const char* string){
 
-	// std::cout << "----------------" << std::endl;
-	//std::cout << string << std::endl;
-	//std::cout << "----------------" << std::endl/* << std::endl*/
-
-	//Serial.println(string);
-
 	lcd.setCursor(0, 0);
 	lcd.print(string);
 	lcd.setCursor(0, 1);
 	char second_line[17];
 	memcpy(second_line, &string[17], 17);
 	lcd.print(second_line);
+
+}
+
+void Display::backlightOn(){
+	lcd.setBacklight(HIGH);
+	backlightState = true;
+}
+
+void Display::backlightOff(){
+	lcd.setBacklight(LOW);
+	backlightState = false;
+}
+
+bool Display::startBacklight(){
+
+	backlightTimer = millis();
+
+	// Turn on backlight if input is received, but do not respond until next input within timeout
+	if(!backlightState){
+		backlightOn();
+		return true;
+	}else{
+		return false;
+	}
 
 }
