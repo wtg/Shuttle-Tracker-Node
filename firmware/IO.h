@@ -9,6 +9,22 @@ class IO {
 	const int encoderPin1 = 9;
 	const int encoderPin2 = 20;
 
+	const int cols[4] = {3,2,1,0};
+	const int rows[3] = {5,6,7};
+
+	const int bounce_interval = 200;
+	const char button_vals[3][4] = {
+		{'1','2','3','#'},
+		{'4','5','6','0'},
+		{'7','8','9','*'}
+	};
+
+	bool bouncing[3][4] = {
+		{true, true, true, true},
+		{true, true, true, true},
+		{true, true, true, true},
+	};
+
 	// Track Encoder and Button Inputs
 	volatile int lastEncoded = 0;
 	volatile long encoderValue = 0;

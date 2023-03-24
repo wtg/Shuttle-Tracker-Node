@@ -46,18 +46,6 @@ void setup() {
 
 }
 
-const int bounce_interval = 200;
-const char button_vals[3][4] = {
-    {'1','2','3','#'},
-    {'4','5','6','0'},
-    {'7','8','9','*'}
-};
-
-bool bouncing[3][4] = {
-    {true, true, true, true},
-    {true, true, true, true},
-    {true, true, true, true},
-};
 
 void loop() {
     char buffer[100];
