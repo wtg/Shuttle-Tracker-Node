@@ -145,7 +145,7 @@
     (fp_circle (center 0 0) (end 1.5 0) (layer "F.CrtYd") (width 0.05) (fill none) (tstamp b7251d1a-039d-4080-8265-a5c50bcf70f8))
     (fp_circle (center 0 0) (end 0.5 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp 086a3834-ba4c-4b04-8878-475a74ccd659))
     (fp_circle (center 0 0) (end 1 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp 1be499fb-253d-4dc9-891e-944e4d140d3a))
-    (pad "1" thru_hole circle (at 0 0 270) (size 2 2) (drill 1) (layers *.Cu *.Mask)
+    (pad "1" thru_hole circle (at 0 0 270) (size 1.53 1.53) (drill 1) (layers *.Cu *.Mask)
       (net 4 "LCD_GND") (pinfunction "Pin_1") (pintype "passive") (tstamp 79331198-60bc-4c25-a31c-c1fd57b65cd7))
     (model "${KICAD6_3DMODEL_DIR}/Connector_Pin.3dshapes/Pin_D1.0mm_L10.0mm.wrl"
       (offset (xyz 0 0 0))
@@ -341,7 +341,7 @@
     (fp_circle (center 0 0) (end 1.5 0) (layer "F.CrtYd") (width 0.05) (fill none) (tstamp 762f8593-0c05-4cda-b76d-b34eca0fedc5))
     (fp_circle (center 0 0) (end 0.5 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp 0773f31e-4958-4b3c-ad69-049b8603eaa2))
     (fp_circle (center 0 0) (end 1 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp ae4fbac7-b2c6-4e1f-a302-4f959ee3dc9e))
-    (pad "1" thru_hole circle (at 0 0 270) (size 2 2) (drill 1) (layers *.Cu *.Mask)
+    (pad "1" thru_hole circle (at 0 0 270) (size 1.53 1.53) (drill 1) (layers *.Cu *.Mask)
       (net 2 "LCD_CLK") (pinfunction "Pin_1") (pintype "passive") (tstamp 4a903e9f-350c-49d5-9155-92dab3ad0bc4))
     (model "${KICAD6_3DMODEL_DIR}/Connector_Pin.3dshapes/Pin_D1.0mm_L10.0mm.wrl"
       (offset (xyz 0 0 0))
@@ -375,7 +375,7 @@
     (fp_circle (center 0 0) (end 1.5 0) (layer "F.CrtYd") (width 0.05) (fill none) (tstamp 585bd22b-3b89-4220-a8ce-02c9728f8558))
     (fp_circle (center 0 0) (end 0.5 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp e205b1b9-b9ab-4b01-8cb3-14e38eaf420b))
     (fp_circle (center 0 0) (end 1 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp f8b6ade8-9482-4f8b-8caf-896f85e200a5))
-    (pad "1" thru_hole circle (at 0 0 270) (size 2 2) (drill 1) (layers *.Cu *.Mask)
+    (pad "1" thru_hole circle (at 0 0 270) (size 1.53 1.53) (drill 1) (layers *.Cu *.Mask)
       (net 3 "LCD_5V") (pinfunction "Pin_1") (pintype "passive") (tstamp af669f5f-d990-4003-886c-e04a2ebd3644))
     (model "${KICAD6_3DMODEL_DIR}/Connector_Pin.3dshapes/Pin_D1.0mm_L10.0mm.wrl"
       (offset (xyz 0 0 0))
@@ -538,7 +538,7 @@
     (fp_circle (center 0 0) (end 1.5 0) (layer "F.CrtYd") (width 0.05) (fill none) (tstamp 0fb61499-d1ae-4646-95b5-c7fd6c7e1ff9))
     (fp_circle (center 0 0) (end 0.5 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp e6f4dde5-7aaa-4bd5-9fd9-0cee43f34d16))
     (fp_circle (center 0 0) (end 1 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp ec980fec-2939-46a7-b8d4-a05b166cc627))
-    (pad "1" thru_hole circle (at 0 0 270) (size 2 2) (drill 1) (layers *.Cu *.Mask)
+    (pad "1" thru_hole circle (at 0 0 270) (size 1.53 1.53) (drill 1) (layers *.Cu *.Mask)
       (net 29 "BAT_5V") (pinfunction "Pin_1") (pintype "passive") (tstamp 2b0d1ff5-d41e-40dc-b8a9-aaa07930e5b0))
     (model "${KICAD6_3DMODEL_DIR}/Connector_Pin.3dshapes/Pin_D1.0mm_L10.0mm.wrl"
       (offset (xyz 0 0 0))
@@ -738,7 +738,7 @@
     (fp_circle (center 0 0) (end 1.5 0) (layer "F.CrtYd") (width 0.05) (fill none) (tstamp 60bc6b88-2324-46b4-b2a6-91d6356d3167))
     (fp_circle (center 0 0) (end 1 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp 66cd0a80-2e87-4210-960c-44d83b14427e))
     (fp_circle (center 0 0) (end 0.5 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp a1c01075-b318-419c-bb45-05066116b69d))
-    (pad "1" thru_hole circle (at 0 0 270) (size 2 2) (drill 1) (layers *.Cu *.Mask)
+    (pad "1" thru_hole circle (at 0 0 270) (size 1.53 1.53) (drill 1) (layers *.Cu *.Mask)
       (net 30 "BAT_GND") (pinfunction "Pin_1") (pintype "passive") (tstamp b44d4fff-53a0-471a-8e41-9758569b82e6))
     (model "${KICAD6_3DMODEL_DIR}/Connector_Pin.3dshapes/Pin_D1.0mm_L10.0mm.wrl"
       (offset (xyz 0 0 0))
@@ -1345,7 +1345,7 @@
     (fp_circle (center 0 0) (end 1.5 0) (layer "F.CrtYd") (width 0.05) (fill none) (tstamp f2f33056-ae43-44e0-93f0-dbc358519845))
     (fp_circle (center 0 0) (end 1 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp 1fc79144-0d25-463a-ad27-2676e64a8d86))
     (fp_circle (center 0 0) (end 0.5 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp e41f68ae-2588-4932-bc6c-04d5b904ac27))
-    (pad "1" thru_hole circle (at 0 0 270) (size 2 2) (drill 1) (layers *.Cu *.Mask)
+    (pad "1" thru_hole circle (at 0 0 270) (size 1.53 1.53) (drill 1) (layers *.Cu *.Mask)
       (net 1 "LCD_DAT") (pinfunction "Pin_1") (pintype "passive") (tstamp 10f658ee-c0e5-473b-b720-b2da84013118))
     (model "${KICAD6_3DMODEL_DIR}/Connector_Pin.3dshapes/Pin_D1.0mm_L10.0mm.wrl"
       (offset (xyz 0 0 0))
@@ -1379,7 +1379,7 @@
     (fp_circle (center 0 0) (end 1.5 0) (layer "F.CrtYd") (width 0.05) (fill none) (tstamp 8709bf9b-2e53-4cc1-9eac-e1b1975bf096))
     (fp_circle (center 0 0) (end 0.5 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp 60e966c1-fb10-40a9-b64e-d98dc3a82cb3))
     (fp_circle (center 0 0) (end 1 0) (layer "F.Fab") (width 0.12) (fill none) (tstamp f86ae1d6-19d7-42d5-930f-495a518a503a))
-    (pad "1" thru_hole circle (at 0 0 270) (size 2 2) (drill 1) (layers *.Cu *.Mask)
+    (pad "1" thru_hole circle (at 0 0 270) (size 1.53 1.53) (drill 1) (layers *.Cu *.Mask)
       (net 21 "V_IN") (pinfunction "Pin_1") (pintype "passive") (tstamp ac7ac2c0-4634-4c50-a36d-9d7d4af59a27))
     (model "${KICAD6_3DMODEL_DIR}/Connector_Pin.3dshapes/Pin_D1.0mm_L10.0mm.wrl"
       (offset (xyz 0 0 0))
