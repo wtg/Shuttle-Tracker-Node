@@ -1,0 +1,88 @@
+#include "IO.h"
+#include "Display.h"
+
+IO::IO(){
+
+	// GPIO Setup
+	pinMode(encoderPin1, INPUT_PULLUP);
+	pinMode(encoderPin2, INPUT_PULLUP);
+	pinMode(encoderButtonPin, INPUT_PULLUP);
+
+	// Interrupt Setup
+	attachInterrupt(encoderPin1, isrUpdateEncoder, CHANGE);
+	attachInterrupt(encoderPin2, isrUpdateEncoder, CHANGE);
+	attachInterrupt(encoderButtonPin, isrUpdateButton, CHANGE);
+
+}
+
+IO& IO::get_instance(){
+	static IO instance;
+	return instance;
+}
+
+void IO::loop(){
+
+	// Check if encoder was moved right or left since last loop
+	if(encoderValue > lastEncoderValue){
+		Display::get_instance().rotaryRight();
+		lastEncoderValue = encoderValue;
+	}
+	else if(encoderValue < lastEncoderValue){
+		Display::get_instance().rotaryLeft();
+		lastEncoderValue = encoderValue;
+	}
+
+	// Check if button has been pressed since last loop
+	if(buttonValue > lastButtonCount){
+		Display::get_instance().rotarySelect();
+		lastButtonCount = buttonValue;
+	}
+
+}
+
+void IO::isrUpdateEncoder(){
+	IO::get_instance().updateEncoder();
+}
+
+void IO::isrUpdateButton(){
+	IO::get_instance().updateButton();
+}
+
+void IRAM_ATTR IO::updateEncoder(){
+
+	int MSB = digitalRead(encoderPin1); //MSB = most significant bit
+	int LSB = digitalRead(encoderPin2); //LSB = least significant bit
+
+	int encoded = (MSB << 1) | LSB; //converting the 2 pin value to single number
+	int sum  = (lastEncoded << 2) | encoded; //adding it to the previous encoded value
+
+
+	// Overcounting issue might be solved by adjusting these if statements.
+	// It might be that not all clauses are necessary
+	if(sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) {
+		encoderValue ++;
+	}
+	if(sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) {
+		encoderValue --;
+	}
+
+	lastEncoded = encoded; //store this value for next time
+
+}
+
+void IRAM_ATTR IO::updateButton(){
+
+	static unsigned long last_interrupt_time = 0;
+	const int debounce_interval = 200;
+	unsigned long interrupt_time = millis();
+
+	if(interrupt_time - last_interrupt_time > debounce_interval ){
+		int cvalue = digitalRead(encoderButtonPin);
+		if(cvalue != lastButton){
+			buttonValue++;
+			lastButton = cvalue;
+			last_interrupt_time = interrupt_time;
+		}
+	}
+
+}
