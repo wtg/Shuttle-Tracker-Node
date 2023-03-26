@@ -54,6 +54,7 @@ private:
 	// Interrupt logic, called by static ISRs
 	void IRAM_ATTR updateEncoder();
 	void IRAM_ATTR updateButton();
+	void KeypadPolling();
 
 	// Parse and run serial commands
 	void serialCommandParser();

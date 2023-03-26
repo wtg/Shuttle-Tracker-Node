@@ -1,5 +1,5 @@
 const int cols[4] = {3,2,1,0};
-const int rows[3] = {6,5,4};
+const int rows[3] = {5,6,7};
 
 
 /* OLD Interrupt Keypad testing code
@@ -48,7 +48,6 @@ void setup() {
 
 
 void loop() {
-    char buffer[100];
     unsigned long time = millis();
     for(int i = 0; i < 3; ++i){
         if (digitalRead(cols[i]) == HIGH) continue;

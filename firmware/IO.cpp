@@ -54,8 +54,21 @@ void IO::loop(){
 		lastButtonCount = buttonValue;
 	}
 
+    IO::get_instance().KeypadPolling();
+	// Parse and run serial commands
+	serialCommandParser();
 
-    char buffer[100];
+}
+
+void IO::isrUpdateEncoder(){
+	IO::get_instance().updateEncoder();
+}
+
+void IO::isrUpdateButton(){
+	IO::get_instance().updateButton();
+}
+
+void IO::KeypadPolling(){
     unsigned long time = millis();
     for(int i = 0; i < 3; ++i){
         if (digitalRead(cols[i]) == HIGH) continue;
@@ -80,18 +93,6 @@ void IO::loop(){
         }
         pinMode(rows[i], INPUT_PULLUP);
     }
-
-	// Parse and run serial commands
-	serialCommandParser();
-
-}
-
-void IO::isrUpdateEncoder(){
-	IO::get_instance().updateEncoder();
-}
-
-void IO::isrUpdateButton(){
-	IO::get_instance().updateButton();
 }
 
 void IRAM_ATTR IO::updateEncoder(){
