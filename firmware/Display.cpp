@@ -59,6 +59,8 @@ void Display::rotarySelect(){
 		case HOME:
 			switch(currentNavOption){
 				case NAV_STATE_SET_BUS:
+					strcpy(busEntryID, "_  ");
+					busEntryPos = 0;
 					navigateTo(BUS_ENTRY);
 					break;
 				case NAV_STATE_TOGGLE_BT:
