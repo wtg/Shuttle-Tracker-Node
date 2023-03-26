@@ -56,7 +56,9 @@ void IO::loop(){
 
     IO::get_instance().KeypadPolling();
 	// Parse and run serial commands
+    #ifndef DEPLOY
 	serialCommandParser();
+    #endif
 
 }
 
@@ -79,9 +81,11 @@ void IO::KeypadPolling(){
             /* if(digitalRead(cols[j]) == LOW && time - bouncing[i][j] > bounce_interval){ */
             if(digitalRead(cols[j]) == LOW && bouncing[i][j]){
                 bouncing[i][j] = false;
-                char newbuf[100];
-                sprintf(newbuf, "%c, R: %d | C:%d", button_vals[i][j], rows[i], cols[j]);
-                Serial.println(newbuf);
+                #ifndef DEPLOY
+                    char newbuf[100];
+                    sprintf(newbuf, "%c, R: %d | C:%d", button_vals[i][j], rows[i], cols[j]);
+                    Serial.println(newbuf);
+                #endif
 				if(button_vals[i][j] == '*') {Display::get_instance().backspace();}
 				else{ Display::get_instance().keypadPress(button_vals[i][j]);}
             }

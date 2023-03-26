@@ -1,6 +1,18 @@
 const int cols[4] = {3,2,1,0};
 const int rows[3] = {5,6,7};
 
+const int bounce_interval = 200;
+const char button_vals[3][4] = {
+    {'1','2','3','#'},
+    {'4','5','6','0'},
+    {'7','8','9','*'}
+};
+
+bool bouncing[3][4] = {
+    {true, true, true, true},
+    {true, true, true, true},
+    {true, true, true, true},
+};
 
 /* OLD Interrupt Keypad testing code
 void IRAM_ATTR updateKeypad(){
@@ -57,6 +69,9 @@ void loop() {
             pinMode(cols[j], INPUT_PULLUP);
             /* if(digitalRead(cols[j]) == LOW && time - bouncing[i][j] > bounce_interval){ */
             if(digitalRead(cols[j]) == LOW && bouncing[i][j]){
+                #ifndef PROD
+                Serial.println("Running in Debug mode");
+                #endif
                 bouncing[i][j] = false;
                 char newbuf[100];
                 sprintf(newbuf, "%c, R: %d | C:%d", button_vals[i][j], rows[i], cols[j]);
@@ -70,5 +85,6 @@ void loop() {
         }
         pinMode(rows[i], INPUT_PULLUP);
     }
+
     delay(100);
 }
