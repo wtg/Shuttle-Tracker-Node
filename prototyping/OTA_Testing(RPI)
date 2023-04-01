@@ -1,39 +1,74 @@
-#include <WiFi.h>
+#include <WiFi.h> //Wifi library
 #include <ESPmDNS.h>
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
+#include <WiFiClient.h>
+#include <WebServer.h>
+#include "esp_wpa2.h" //wpa2 library for connections to Enterprise networks
 
-/*
-const char* ssid = "RPI";
-#define EAP_IDENTITY "username@rpi.edu" 
-#define EAP_PASSWORD "rpi_password"
+byte mac[6];
+const char* host = "arduino.clanweb.eu"; //webserver
+String url = "/eduroam/data.php"; //URL to target PHP file
 
-static const char incommon_ca[] PROGMEM = R"EOF(
------BEGIN CERTIFICATE-----
------END CERTIFICATE-----
-)EOF";
-*/
+//Identity for user with password related to his realm (organization)
+//Available option of anonymous identity for federation of RADIUS servers or 1st Domain RADIUS servers
 
+#define EAP_ANONYMOUS_IDENTITY "kims29@rpi.edu" //anonymous@example.com, or you can use also nickname@example.com
+#define EAP_IDENTITY "kims29" //nickname@example.com, at some organizations should work nickname only without realm, but it is not recommended
+#define EAP_PASSWORD "sean01045997201" //password for eduroam account
+
+//SSID NAME
+const char* ssid = "rpi_wpa2"; // eduroam SSID
 
 void setup() {
-  
   Serial.begin(115200);
-  Serial.println("Booting");
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid);
-  //esp_wifi_sta_wpa2_ent_set_ca_cert((uint8_t *)incommon_ca, strlen(incommon_ca) + 1);  // for certificate
-  esp_wifi_sta_wpa2_ent_set_identity((uint8_t *)EAP_IDENTITY, strlen(EAP_IDENTITY));
-  esp_wifi_sta_wpa2_ent_set_username((uint8_t *)EAP_IDENTITY, strlen(EAP_IDENTITY));
-  esp_wifi_sta_wpa2_ent_set_password((uint8_t *)EAP_PASSWORD, strlen(EAP_PASSWORD));
-  esp_wpa2_config_t config = WPA2_CONFIG_INIT_DEFAULT();
-  esp_wifi_sta_wpa2_ent_enable(&config);
+  delay(10);
+  Serial.print(F("Connecting to network: "));
+  Serial.println(ssid);
+  WiFi.disconnect(true);  //disconnect from WiFi to set new WiFi connection
+  WiFi.mode(WIFI_STA); //init wifi mode
+  //WiFi.begin(ssid, WPA2_AUTH_PEAP, EAP_ANONYMOUS_IDENTITY, EAP_IDENTITY, EAP_PASSWORD, test_root_ca); //with CERTIFICATE
+
+  WiFi.begin(ssid, WPA2_AUTH_PEAP, EAP_ANONYMOUS_IDENTITY, EAP_IDENTITY, EAP_PASSWORD); //WITHOUT CERTIFICATE - WORKING WITH EXCEPTION ON RADIUS SERVER
+
+  // Example: a cert-file WPA2 Enterprise with PEAP - client certificate and client key required
+  //WiFi.begin(ssid, WPA2_AUTH_PEAP, EAP_IDENTITY, EAP_USERNAME, EAP_PASSWORD, test_root_ca, client_cert, client_key);
+
+  // Example: TLS with cert-files and no password - client certificate and client key required
+  //WiFi.begin(ssid, WPA2_AUTH_TLS, EAP_IDENTITY, NULL, NULL, test_root_ca, client_cert, client_key);
+  /*while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(F("."));
+  }
+  */
   while (WiFi.waitForConnectResult() != WL_CONNECTED) {
     Serial.println("Connection Failed! Rebooting...");
     delay(5000);
     ESP.restart();
   }
 
-  ArduinoOTA
+  Serial.println("");
+  Serial.println(F("WiFi is connected!"));
+  Serial.println(F("IP address set: "));
+  Serial.println(WiFi.localIP()); //print LAN IP
+  
+  WiFi.macAddress(mac);
+  Serial.print("MAC address: ");
+  Serial.print(mac[0], HEX);
+  Serial.print(":");
+  Serial.print(mac[1], HEX);
+  Serial.print(":");
+  Serial.print(mac[2], HEX);
+  Serial.print(":");
+  Serial.print(mac[3], HEX);
+  Serial.print(":");
+  Serial.print(mac[4], HEX);
+  Serial.print(":");
+  Serial.println(mac[5], HEX);
+  
+  http_request(); //I will receive information about successful connection and identity realm (i can write it into Github project page as u have tested it)
+
+    ArduinoOTA
     .onStart([]() {
       String type;
       if (ArduinoOTA.getCommand() == U_FLASH)
@@ -65,23 +100,36 @@ void setup() {
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
 }
-
 void loop() {
-  ArduinoOTA.handle();  
-  #ifdef RGB_BUILTIN
-  digitalWrite(RGB_BUILTIN, HIGH);   // Turn the RGB LED white
-  delay(1000);
-  digitalWrite(RGB_BUILTIN, LOW);    // Turn the RGB LED off
-  delay(1000);
+  ArduinoOTA.handle();
+  //yield();
+}
 
-  neopixelWrite(RGB_BUILTIN,RGB_BRIGHTNESS,0,0); // Red
+void http_request() {
+  WiFiClient client;
   delay(1000);
-  neopixelWrite(RGB_BUILTIN,0,RGB_BRIGHTNESS,0); // Green
-  delay(1000);
-  neopixelWrite(RGB_BUILTIN,0,0,RGB_BRIGHTNESS); // Blue
-  delay(1000);
-  neopixelWrite(RGB_BUILTIN,0,0,0); // Off / black
-  delay(1000);
-#endif
-
+  client.stop();
+  String data = "ssid=" + String(ssid) + "&identity=" + String(EAP_IDENTITY) + "&anonymous_identity=" + String(EAP_IDENTITY);
+  if (client.connect(host, 80)) {
+    Serial.println(F("Connected to webserver!"));
+    client.println("POST " + url + " HTTP/1.0");
+    client.println("Host: " + (String)host);
+    client.println(F("User-Agent: ESP32"));
+    client.println(F("Connection: close"));
+    client.println(F("Content-Type: application/x-www-form-urlencoded;"));
+    client.print(F("Content-Length: "));
+    client.println(data.length());
+    client.println();
+    client.println(data);
+    Serial.println(F("Data received by server, THANKS for trying this eduroam connection example!"));
+    while (client.connected()) {
+      String line = client.readStringUntil('\n'); //HTTP HEADER
+      if (line == "\r") {
+        break;
+      }
+    }
+    String line = client.readStringUntil('\n'); //HTTP PAYLOAD
+  } else {
+    Serial.println(F("Connection wasn't sucessful, try again later"));
+  }
 }
