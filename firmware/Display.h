@@ -32,7 +32,7 @@ class Display {
 	};
 
 	// The current menu state (Initialized to the startup state)
-	menuState currentMenu = HOME;
+	menuState currentMenu = BUS_ENTRY;
 
 	// The currently shown navigation option (Initialized to the startup selection)
 	int currentNavOption = NAV_STATE_NONE;
