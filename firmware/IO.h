@@ -58,6 +58,5 @@ private:
 
 	// Parse and run serial commands
 	void serialCommandParser();
-	// TODO: Disable in production?
 
 };

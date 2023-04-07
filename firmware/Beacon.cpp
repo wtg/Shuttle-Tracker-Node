@@ -7,6 +7,7 @@
 
 Beacon::Beacon(){
 
+	datastore.begin("test", false);
 	// Beacon setup
 	BLEDevice::init("Shuttle Tracker Node");
 	pAdvertising = BLEDevice::getAdvertising();
@@ -15,6 +16,8 @@ Beacon::Beacon(){
 	pAdvertising->setScanResponseData(oScanResponseData);
 	setBeaconData();
 	pAdvertising->stop();// Don't broadcast right away
+	busID = datastore.getInt("busId", 0);
+
 
 }
 
@@ -54,6 +57,7 @@ void Beacon::loop(){
 void Beacon::setBusID(int busID){
 
 	this->busID = busID;
+	datastore.putInt("busID", busID);
 
 	// Update beacon data with new bus ID
 	setBeaconData();

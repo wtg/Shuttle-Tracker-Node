@@ -2,7 +2,6 @@
 #include "Display.h"
 
 IO::IO(){
-
 	// GPIO Setup
 	pinMode(encoderPin1, INPUT_PULLUP);
 	pinMode(encoderPin2, INPUT_PULLUP);
@@ -37,7 +36,6 @@ IO& IO::get_instance(){
 }
 
 void IO::loop(){
-
 	// Check if encoder was moved right or left since last loop
 	if(encoderValue > lastEncoderValue){
 		Display::get_instance().rotaryRight();
