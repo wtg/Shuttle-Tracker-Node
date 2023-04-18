@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Preferences.h"
 #include "BLEAdvertising.h"
 
 class Beacon {
@@ -22,6 +23,9 @@ class Beacon {
 
 	// Private constructor for singleton
 	Beacon();
+
+	// Object for accessing persistant storage.
+	Preferences datastore;
 
 public:
 	// Get the single instance

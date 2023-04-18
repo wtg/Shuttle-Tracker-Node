@@ -16,6 +16,10 @@ Beacon::Beacon(){
 	setBeaconData();
 	pAdvertising->stop();// Don't broadcast right away
 
+	// Initialize memory access object and retrieve previous busID.
+	datastore.begin("main", false);
+	busID = datastore.getInt("busId", 0);
+
 }
 
 Beacon& Beacon::get_instance(){
@@ -54,6 +58,7 @@ void Beacon::loop(){
 void Beacon::setBusID(int busID){
 
 	this->busID = busID;
+	datastore.putInt("busID", busID);
 
 	// Update beacon data with new bus ID
 	setBeaconData();
