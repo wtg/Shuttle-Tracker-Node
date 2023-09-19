@@ -2,7 +2,11 @@
 #include "Arduino.h"
 #include "Display.h"
 
-Battery::Battery(){}
+Battery::Battery(){
+  for (int i =0; i< N_READINGS; i++){
+    readings[i] = 0;
+  }
+}
 
 Battery& Battery::get_instance(){
 	static Battery instance;
@@ -16,8 +20,7 @@ void Battery::loop(){
 
 		lastReadingTime = millis();
 
-		measure();
-
+		measure();  
 		// If the percentage changed, update the display
 		if(percentage != lastPercentage){
 			Display::get_instance().render();
@@ -49,4 +52,8 @@ void Battery::measure(){
 	if(percentage < 0) percentage = 0;
 	if(percentage > 100) percentage = 100;
 
+}
+
+void Battery::alertError() {
+	// Implement error handling logic. 
 }

@@ -5,6 +5,9 @@ class Battery {
 	// IO Pin Assignment
 	const int batteryPin = 4;
 
+  // Number of readings for smoothing
+  #define N_READINGS 10
+
 	// Frequency to measure battery voltage in ms
 	const int pollFrequency = 10000;
 	unsigned long lastReadingTime = 0;
@@ -16,6 +19,12 @@ class Battery {
 	// Battery Parameters
 	const float batteryMax = 4.2;// Full charge voltage
 	const float batteryMin = 3.0;// Full discharge voltage
+  const float calibrationFactor = 1.0; // Add a calibration factor
+
+  float readings[N_READINGS];  // Array to hold last N readings
+  int readIndex = 0;  // Index for the current reading
+	float total = 0;  // Total of the last N readings
+	float averageVoltage = 0;  // The average of the last N readings
 
 	// Battery State
 	int percentage = 0;
@@ -23,6 +32,8 @@ class Battery {
 
 	// Private constructor for singleton
 	Battery();
+
+  void alertError(); // For error handling
 
 public:
 	// Get the single instance
@@ -37,5 +48,4 @@ public:
 private:
 	// Take a reading and calculate percentage
 	void measure();
-
 };
