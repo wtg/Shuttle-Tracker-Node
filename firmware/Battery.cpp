@@ -41,21 +41,20 @@ void Battery::measure(){
 
 	// Get raw analog reading (0 - 4095)
 	int reading = analogRead(batteryPin);
+	total -= readings[readIndex]; // Subtract the last reading
+	readings[readIndex] = reading * 3.3 / 4096 * (R1 + R2) / R2 * calibrationFactor;  // Replace it with the new reading and convert to voltage
+	total += readings[readIndex];  // Add it to the total
+	readIndex = (readIndex + 1) % N_READINGS;  // Increment the index
+	averageVoltage = total / N_READINGS;  // Calculate the new average
 
-	// Convert to raw input voltage (0 - 3.3 V)
-	float voltage = reading * 3.3 / 4096;
-
-	// Calculate battery voltage before voltage divider
-	float batteryVoltage = voltage * (R1+R2) / R2;
-
-	// Calculate percentage based on min and max charge voltage of battery
-	percentage = 100 * (batteryVoltage - batteryMin) / (batteryMax - batteryMin);
-
-	if(percentage < 0) percentage = 0;
-	if(percentage > 100) percentage = 100;
-
+	percentage = 100 * (averageVoltage - batteryMin) / (batteryMax - batteryMin);
+	if (percentage < 0) {
+		percentage = 0;
+	} else if (percentage > 100) {
+		percentage = 100;
+	}
 }
 
 void Battery::alertError() {
-	// Implement error handling logic. 
+	Serial.println("ERROR: Invalid battery percentage reading!");
 }
