@@ -16,19 +16,21 @@ Battery& Battery::get_instance(){
 void Battery::loop(){
 
 	unsigned long now = millis();
+  
 	if(now - lastReadingTime > pollFrequency || lastReadingTime > now){
-
 		lastReadingTime = millis();
-
 		measure();  
+    
 		// If the percentage changed, update the display
-		if(percentage != lastPercentage){
-			Display::get_instance().render();
-			lastPercentage = percentage;
+		if (percentage >= 0 && percentage <= 100) {  // Sanity check
+			if (abs(percentage - lastPercentage) >= 1) {  // Event-driven update, change the threshold as needed
+				Display::get_instance().render();
+				lastPercentage = percentage;
+			}
+		} else {
+			alertError();  // Alert if the reading is outside the expected range
 		}
-
 	}
-
 }
 
 int Battery::getPercentage() const{
