@@ -36,7 +36,7 @@ void Battery::loop(){
 int Battery::getPercentage() const{
 	return percentage;
 }
-
+//abc
 void Battery::measure(){
 
 	// Get raw analog reading (0 - 4095)
@@ -48,6 +48,7 @@ void Battery::measure(){
 	averageVoltage = total / N_READINGS;  // Calculate the new average
 
 	percentage = 100 * (averageVoltage - batteryMin) / (batteryMax - batteryMin);
+  Serial.println(percentage);
 	if (percentage < 0) {
 		percentage = 0;
 	} else if (percentage > 100) {
