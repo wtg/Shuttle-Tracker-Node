@@ -22,10 +22,10 @@ void setup(){
     WiFi.begin(ssid,password);
     
 
-    while (WiFi.status() != WL_CONNECTED) {
-      delay(1000);
-      Serial.println(F("Connecting to WiFi..."));
-    }
+    // while (WiFi.status() != WL_CONNECTED) {
+    //   delay(1000);
+    //   Serial.println(F("Connecting to WiFi..."));
+    // }
     Serial.println(F("Connected to WiFi"));
     // Setup OTA handlers
     ArduinoOTA.onStart([]() {

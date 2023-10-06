@@ -18,7 +18,7 @@ class Battery {
 
 	// Battery Parameters
 	const float batteryMax = 4.2;// Full charge voltage
-	const float batteryMin = 3.0;// Full discharge voltage
+	const float batteryMin = 3.4;// Full discharge voltage
   const float calibrationFactor = 1.0; // Add a calibration factor
 
   float readings[N_READINGS];  // Array to hold last N readings
