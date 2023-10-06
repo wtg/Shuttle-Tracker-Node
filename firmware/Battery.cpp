@@ -48,7 +48,6 @@ void Battery::measure(){
 	averageVoltage = total / N_READINGS;  // Calculate the new average
 
 	percentage = 100 * (averageVoltage - batteryMin) / (batteryMax - batteryMin);
-  Serial.println(percentage);
 	if (percentage < 0) {
 		percentage = 0;
 	} else if (percentage > 100) {
