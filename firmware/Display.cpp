@@ -1,7 +1,7 @@
 #include "Display.h"
 #include "Battery.h"
 #include "Beacon.h"
-#include "WifiManager.h"
+#include "WiFi.h"
 
 Display::Display(){
 
@@ -193,8 +193,12 @@ void Display::render(){
 			SNPRINTF_NO_TERM(&output[17], 1 + BUS_ID_SIZE + 1, "#%s", busEntryID)
 			break;
 		case WIFI_STATUS:
-			SNPRINTF_NO_TERM(&output[17], 15, "129.161.000.000")
-			break;
+			  if (WiFi.status() == WL_CONNECTED) {
+          SNPRINTF_NO_TERM(&output[17], 15, "%s", WiFi.localIP().toString().c_str());
+        } else {
+        SNPRINTF_NO_TERM(&output[17], 15, "Not connect");
+      }
+      break;
 	}
 
 	setDisplay(output);
