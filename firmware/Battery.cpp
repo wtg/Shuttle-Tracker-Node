@@ -23,7 +23,7 @@ void Battery::loop(){
     
 		// If the percentage changed, update the display
 		if (percentage >= 0 && percentage <= 100) {  // Sanity check
-			if (abs(percentage - lastPercentage) >= 1) {  // Event-driven update, change the threshold as needed
+			if (abs(percentage - lastPercentage) >= 1) { 
 				Display::get_instance().render();
 				lastPercentage = percentage;
 			}

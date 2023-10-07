@@ -1,6 +1,7 @@
 #include "Display.h"
 #include "Battery.h"
 #include "Beacon.h"
+#include "WifiManager.h"
 
 Display::Display(){
 
