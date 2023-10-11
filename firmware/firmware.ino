@@ -9,7 +9,7 @@
 #include "WiFiClient.h"
 #include "WifiManager.h"
 
-const char* firmwareURL = "https://github.com/USERNAME/REPO_NAME/raw/main/path_to_file/firmware.bin";
+const char* firmwareURL = "https://github.com/USERNAME/REPO_NAME/raw/main/path_to_file/firmware.bin";  // repo link, should be ending with .bin to fit the HTTPUpdate.h library
 
 char* ssid = "City Station";
 char* password = "CityStation2022";
