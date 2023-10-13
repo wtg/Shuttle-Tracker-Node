@@ -5,12 +5,10 @@ WifiManager::WifiManager(const char* ssid, const char* password)
 
 void WifiManager::attemptConnect() {
     unsigned long now = millis();
-    delay(30000);
-    
     switch(_state) {
         case WIFI_STATE_INIT:
             if(WiFi.status() != WL_CONNECTED) {
-                _lastAttempt = now; // Mark the time we started trying to connect
+                _lastAttempt = now; 
                 WiFi.begin(_ssid, _password);
                 Serial.print("Attempting to connect to WiFi");
                 _state = WIFI_STATE_CONNECTING;
@@ -24,7 +22,7 @@ void WifiManager::attemptConnect() {
                 Serial.println("\nConnected to WiFi");
                 Serial.println(WiFi.localIP());
                 _state = WIFI_STATE_CONNECTED;
-            } else if (now - _lastAttempt > 30000) { // 30 seconds has passed
+            } else if (now - _lastAttempt > 3000) { // 3 seconds has passed
                 Serial.println("\nConnection attempt timed out");
                 WiFi.disconnect();
                 _lastAttempt = now; // Mark the time when we entered the timeout
@@ -38,7 +36,7 @@ void WifiManager::attemptConnect() {
             break;
             
         case WIFI_STATE_TIMEOUT:
-            if (now - _lastAttempt > 3600000) { // 1h hour 
+            if (now - _lastAttempt > 15000) { // 15s hour 
                 _state = WIFI_STATE_INIT; // Go back to the initial state to retry the connection
             }
             break;
