@@ -11,6 +11,15 @@ public:
 private:
     const char* _ssid;
     const char* _password;
+
+        unsigned long _lastAttempt;
+    
+    enum {
+        WIFI_STATE_INIT,
+        WIFI_STATE_CONNECTING,
+        WIFI_STATE_CONNECTED,
+        WIFI_STATE_TIMEOUT
+    } _state;
 };
 
 #endif // WIFI_MANAGER_H
