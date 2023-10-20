@@ -8,6 +8,8 @@
 #include "esp_wifi.h"
 #include "WiFiClient.h"
 #include "WifiManager.h"
+#include <WiFi.h>
+
 
 const char* firmwareURL = "https://github.com/USERNAME/REPO_NAME/raw/main/path_to_file/firmware.bin";  // repo link, should be ending with .bin to fit the HTTPUpdate.h library
 
@@ -39,6 +41,7 @@ void setup(){
     Serial.begin(115200);
     Display::get_instance().init();
     esp_wifi_set_max_tx_power(10);
+    //ESP.getEfuseMac();//TODO: SETUP THE MINOR FIELD
     WiFi.begin(ssid,password);
     //setupOTA();
 }

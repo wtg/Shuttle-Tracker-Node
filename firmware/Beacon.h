@@ -16,6 +16,7 @@ class Beacon {
 
 	// Bus ID
 	int busID = 0;
+  int deviceID = -1;//TODO: SETUP THE MINOR FIELD
 	bool initialBusIDSet = false;
 
 	// The beacon

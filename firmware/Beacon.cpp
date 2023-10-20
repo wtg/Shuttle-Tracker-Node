@@ -109,7 +109,7 @@ void Beacon::setBeaconData(){
 	oBeacon.setManufacturerId(0x4C00); // fake Apple 0x004C LSB (ENDIAN_CHANGE_U16!)
 	oBeacon.setProximityUUID(BLEUUID("9C3F95DC-7A90-4C5E-84CB-3D406D87B73B"));
 	oBeacon.setMajor(busID);
-	oBeacon.setMinor(0);
+	oBeacon.setMinor(deviceID);//TODO: SETUP THE MINOR FIELD
 	BLEAdvertisementData oAdvertisementData = BLEAdvertisementData();
 	oAdvertisementData.setFlags(0x04); // BR_EDR_NOT_SUPPORTED 0x04
 	std::string strServiceData = "";
@@ -120,3 +120,4 @@ void Beacon::setBeaconData(){
 	pAdvertising->setAdvertisementData(oAdvertisementData);
 
 }
+
