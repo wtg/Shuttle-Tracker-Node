@@ -29,7 +29,7 @@ Beacon& Beacon::get_instance(){
 
 void Beacon::loop(){
 
-	if(beaconEnabled){
+	if(beaconEnabled){//TODO: CHANGE THIS TO ALLOW FOR BOARDCASTING UPON BOOT
 
 		unsigned long now = millis();
 
