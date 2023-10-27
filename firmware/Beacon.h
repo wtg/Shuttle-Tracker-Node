@@ -46,6 +46,7 @@ public:
 	bool enabled() const;
 	void start();
 	void stop();
+  uint16_t macToKey();
 
 private:
 	void setBeaconData();

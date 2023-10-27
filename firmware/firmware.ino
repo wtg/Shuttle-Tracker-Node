@@ -47,9 +47,9 @@ void setup(){
 }
 
 void loop(){
+  Beacon::get_instance().loop();
 	IO::get_instance().loop();
 	Display::get_instance().loop();
-	Beacon::get_instance().loop();
 	Battery::get_instance().loop();
   wifiManager.attemptConnect();
   //Serial.println(WiFi.localIP());
