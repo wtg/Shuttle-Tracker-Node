@@ -21,9 +21,18 @@ Beacon::Beacon(){
   if(busID == 0){ // If busID is not set, use the 2-byte MAC key
       busID = macToKey();
       initialBusIDSet = false; // Ensure that this is false if we are using MAC key
-      start();
   } else {
       initialBusIDSet = true; 
+  }
+
+  if (broadcasting) {
+    if(initialBusIDSet){
+        Serial.println("Broadcasting with busID: " + String(busID));
+    } else {
+        Serial.println("Broadcasting with MAC key: " + String(macToKey(), HEX));
+    }
+  } else {
+    Serial.println("Device stopped broadcasting.");
   }
 
 	setBeaconData();
@@ -48,7 +57,7 @@ Beacon& Beacon::get_instance(){
 
 void Beacon::loop(){
 
-	if(beaconEnabled){//TODO: CHANGE THIS TO ALLOW FOR BOARDCASTING UPON BOOT
+	if( busID != 0){//TODO: CHANGE THIS TO ALLOW FOR BOARDCASTING UPON BOOT
 
 		unsigned long now = millis();
 
