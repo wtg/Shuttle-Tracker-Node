@@ -25,16 +25,6 @@ Beacon::Beacon(){
       initialBusIDSet = true; 
   }
 
-  if (broadcasting) {
-    if(initialBusIDSet){
-        Serial.println("Broadcasting with busID: " + String(busID));
-    } else {
-        Serial.println("Broadcasting with MAC key: " + String(macToKey(), HEX));
-    }
-  } else {
-    Serial.println("Device stopped broadcasting.");
-  }
-
 	setBeaconData();
 	pAdvertising->stop();// Don't broadcast right away
 
