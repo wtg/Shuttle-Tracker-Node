@@ -17,14 +17,7 @@ Beacon::Beacon(){
   // Initialize memory access object and retrieve previous busID.
 	datastore.begin("main", false);
 	busID = datastore.getInt("busId", 0);
-
-  if(busID == 0){ // If busID is not set, use the 2-byte MAC key
-      busID = macToKey();
-      initialBusIDSet = false; // Ensure that this is false if we are using MAC key
-  } else {
-      initialBusIDSet = true; 
-  }
-
+  deviceID = macToKey();
 	setBeaconData();
 	pAdvertising->stop();// Don't broadcast right away
 
@@ -47,7 +40,7 @@ Beacon& Beacon::get_instance(){
 
 void Beacon::loop(){
 
-	if( busID != 0){//TODO: CHANGE THIS TO ALLOW FOR BOARDCASTING UPON BOOT
+	//if( beaconEnabled){//TODO: CHANGE THIS TO ALLOW FOR BOARDCASTING UPON BOOT
 
 		unsigned long now = millis();
 
@@ -69,7 +62,7 @@ void Beacon::loop(){
 			lastBroadcastTime = millis();
 		}
 
-	}
+	//}
 
 }
 
@@ -82,10 +75,6 @@ void Beacon::setBusID(int busID){
 	setBeaconData();
 
 	// Automatically turn on after entering the bus ID for the first time
-	if(!initialBusIDSet){
-		on();
-		initialBusIDSet = true;
-	}
 
 }
 
@@ -115,11 +104,8 @@ void Beacon::start(){
 	pAdvertising->start();
 	broadcasting = true;
   Serial.println("Device started broadcasting.");
-  if(initialBusIDSet){
-      Serial.println("Broadcasting with busID: " + String(busID));
-  } else {
-      Serial.println("Broadcasting with MAC key: " + String(macToKey(), HEX));
-  }
+  Serial.println("Broadcasting with busID: " + String(busID));
+   Serial.println("Broadcasting with MAC key: " + String(macToKey(), HEX));
 }
 
 void Beacon::stop(){
@@ -133,15 +119,10 @@ void Beacon::setBeaconData(){
 	BLEBeacon oBeacon = BLEBeacon();
 	oBeacon.setManufacturerId(0x4C00); // fake Apple 0x004C LSB (ENDIAN_CHANGE_U16!)
 	oBeacon.setProximityUUID(BLEUUID("9C3F95DC-7A90-4C5E-84CB-3D406D87B73B"));
-	oBeacon.setMajor(busID);
 
-  if(initialBusIDSet){
-      oBeacon.setMajor(busID);
-  }else{
-      oBeacon.setMajor(0);
-  }
-
+  oBeacon.setMajor(busID);
   oBeacon.setMinor(macToKey());// always set the mac based key to minor field
+  
 	BLEAdvertisementData oAdvertisementData = BLEAdvertisementData();
 	oAdvertisementData.setFlags(0x04); // BR_EDR_NOT_SUPPORTED 0x04
 	std::string strServiceData = "";

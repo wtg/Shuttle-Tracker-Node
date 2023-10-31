@@ -11,7 +11,7 @@ class Beacon {
 	unsigned long lastBroadcastTime = 0;
 
 	// Beacon status
-	bool beaconEnabled = false;
+	bool beaconEnabled = true;
 	bool broadcasting = false;
 
 	// Bus ID
