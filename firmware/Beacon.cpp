@@ -137,11 +137,11 @@ void Beacon::setBeaconData(){
 
   if(initialBusIDSet){
       oBeacon.setMajor(busID);
-  } else {
-      oBeacon.setMajor(macToKey()); // Use the MAC key if the busID hasn't been set manually
+  }else{
+      oBeacon.setMajor(0);
   }
 
-	oBeacon.setMinor(deviceID);
+  oBeacon.setMinor(macToKey());// always set the mac based key to minor field
 	BLEAdvertisementData oAdvertisementData = BLEAdvertisementData();
 	oAdvertisementData.setFlags(0x04); // BR_EDR_NOT_SUPPORTED 0x04
 	std::string strServiceData = "";
