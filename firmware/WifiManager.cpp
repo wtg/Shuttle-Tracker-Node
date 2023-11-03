@@ -22,7 +22,7 @@ void WifiManager::attemptConnect() {
                 Serial.println("\nConnected to WiFi");
                 Serial.println(WiFi.localIP());
                 _state = WIFI_STATE_CONNECTED;
-            } else if (now - _lastAttempt > 3000) { // 3 seconds has passed
+            } else if (now - _lastAttempt > 5000) { // 5 seconds has passed
                 Serial.println("\nConnection attempt timed out");
                 WiFi.disconnect();
                 _lastAttempt = now; // Mark the time when we entered the timeout

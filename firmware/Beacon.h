@@ -6,7 +6,7 @@
 class Beacon {
 
 	// Broadcast settings in ms
-	const int broadcastInterval = 1000;
+	const int broadcastInterval = 5000;
 	const int broadcastDuration = 100;
 	unsigned long lastBroadcastTime = 0;
 

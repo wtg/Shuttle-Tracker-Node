@@ -11,10 +11,14 @@
 #include <WiFi.h>
 
 
-const char* firmwareURL = "https://github.com/USERNAME/REPO_NAME/raw/main/path_to_file/firmware.bin";  // repo link, should be ending with .bin to fit the HTTPUpdate.h library
+const char* firmwareURL = "http://staging.shuttletracker.app/node/firmware.ino.bin";  // repo link, should be ending with .bin to fit the HTTPUpdate.h library
 
-char* ssid = "City Station";
-char* password = "CityStation2022";
+// char* ssid = "Quy Hoang";
+// char* password = "quyhoang";
+
+char* ssid = "Link10Laptop";
+char* password = "password";
+
 WiFiClient client;
 WifiManager wifiManager(ssid, password);
 
@@ -32,8 +36,8 @@ void checkforUpdate() {
       break;
 
     case HTTP_UPDATE_OK:
-        Serial.println("HTTP_UPDATE_OK");
-        break;
+      Serial.println("HTTP_UPDATE_OK");
+      break;
     }
 }
 
@@ -52,6 +56,9 @@ void loop(){
 	Display::get_instance().loop();
 	Battery::get_instance().loop();
   wifiManager.attemptConnect();
+  if(WiFi.status() == WL_CONNECTED){
+    //checkforUpdate();
+  }
   //Serial.println(WiFi.localIP());
 }
 
