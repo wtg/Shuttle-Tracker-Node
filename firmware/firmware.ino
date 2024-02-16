@@ -55,9 +55,12 @@ WiFiClientSecure client;
 WifiManager wifiManager(ssid, password);
 
 bool checkForVersionUpdate() {
+    WiFiClientSecure secureClient;
+    secureClient.setCACert(rootCACertificate);
+
     HTTPClient http;
     bool check = false;
-    http.begin(versionURL);
+    http.begin(secureClient ,versionURL);
     int httpCode = http.GET();
 
     if (httpCode == HTTP_CODE_OK) {
