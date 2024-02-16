@@ -9,7 +9,11 @@
 #include "WiFiClient.h"
 #include "WifiManager.h"
 #include <WiFi.h>
+#include <HTTPClient.h>
 #include <WiFiClientSecure.h>
+#include <string.h>
+
+const char* firmwareVersion = "1.0.0"; 
 
 const char* rootCACertificate = \
 "-----BEGIN CERTIFICATE-----\n" \
@@ -39,6 +43,7 @@ const char* rootCACertificate = \
 "-----END CERTIFICATE-----\n";
 
 const char* firmwareURL = "http://staging.shuttletracker.app/node/firmware.ino.bin";  // repo link, should be ending with .bin to fit the HTTPUpdate.h library
+const char* versionURL = "http://staging.shuttletracker.app/node/version.txt"; // version link
 
 // char* ssid = "Quy Hoang";
 // char* password = "quyhoang";
@@ -48,6 +53,35 @@ char* password = "password";
 
 WiFiClientSecure client;
 WifiManager wifiManager(ssid, password);
+
+bool checkForVersionUpdate() {
+    HTTPClient http;
+    bool check = false;
+    http.begin(versionURL);
+    int httpCode = http.GET();
+
+    if (httpCode == HTTP_CODE_OK) {
+        String latestVersion = http.getString();
+        latestVersion.trim(); 
+
+        Serial.print("Current firmware version: ");
+        Serial.println(firmwareVersion);
+        Serial.print("Latest firmware version: ");
+        Serial.println(latestVersion);
+
+        if (latestVersion != firmwareVersion) {
+            Serial.println("A new firmware version is available, updating...");
+            check = true;
+        } else {
+            Serial.println("Firmware is up to date.");
+        }
+    } else {
+        Serial.print("Failed to check for firmware update. HTTP error: ");
+        Serial.println(httpCode);
+    }
+    http.end();
+    return check;
+}
 
 void checkforUpdate() {
   Serial.println("Checking for firmware updates...");
@@ -86,7 +120,10 @@ void loop(){
 	Battery::get_instance().loop();
   wifiManager.attemptConnect();
   if(WiFi.status() == WL_CONNECTED){
-    //checkforUpdate();
+    if (!checkForVersionUpdate())   {
+      //checkforUpdate();
+
+    }
   }
   //Serial.println(WiFi.localIP());
 }
