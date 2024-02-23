@@ -1,5 +1,5 @@
 #include "WifiManager.h"
-
+//TODO: check this function for the HTTPS connection, maybe it is a problem
 WifiManager::WifiManager(const char* ssid, const char* password)
   : _ssid(ssid), _password(password), _lastAttempt(0), _state(WIFI_STATE_INIT) {}
 
@@ -36,7 +36,7 @@ void WifiManager::attemptConnect() {
             break;
             
         case WIFI_STATE_TIMEOUT:
-            if (now - _lastAttempt > 15000) { // 15s hour 
+            if (now - _lastAttempt > 10000) { // 15s 
                 _state = WIFI_STATE_INIT; // Go back to the initial state to retry the connection
             }
             break;

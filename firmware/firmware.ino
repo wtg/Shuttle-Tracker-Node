@@ -13,7 +13,7 @@
 #include <WiFiClientSecure.h>
 #include <string.h>
 
-const char* firmwareVersion = "1.0.0"; 
+const char* firmwareVersion = "0.0.0"; 
 
 const char* rootCACertificate = \
 "-----BEGIN CERTIFICATE-----\n" \
@@ -41,6 +41,9 @@ const char* rootCACertificate = \
 "Z7zedjBIcLYAFFeW/V/RkU9EBedchhYnVsuUZKj+g2Mlepicd1QiQjqIMN9/mj9Z\n" \
 "tSjGMZR2NHlTywUQ6pxaVK+phEYw/+DqVYyg2eg=\n" \
 "-----END CERTIFICATE-----\n";
+
+// turn on JTAG, increase the flash size before exporting to a binary file.
+
 
 const char* firmwareURL = "http://staging.shuttletracker.app/node/firmware.ino.bin";  // repo link, should be ending with .bin to fit the HTTPUpdate.h library
 const char* versionURL = "http://staging.shuttletracker.app/node/version.txt"; // version link
@@ -110,7 +113,6 @@ void setup(){
     Serial.begin(115200);
     Display::get_instance().init();
     esp_wifi_set_max_tx_power(10);
-    //ESP.getEfuseMac();//TODO: SETUP THE MINOR FIELD
     WiFi.begin(ssid,password);
     //setupOTA();
     client.setCACert(rootCACertificate);
@@ -125,9 +127,8 @@ void loop(){
   if(WiFi.status() == WL_CONNECTED){
     if (!checkForVersionUpdate())   {
       //checkforUpdate();
-
     }
   }
-  //Serial.println(WiFi.localIP());
+  Serial.println(WiFi.localIP());
 }
 
