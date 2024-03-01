@@ -12,7 +12,6 @@
 #include <HTTPClient.h>
 #include <WiFiClientSecure.h>
 #include <string.h>
-
 const char* firmwareVersion = "1.0.0"; 
 
 const char* rootCACertificate = \
@@ -53,6 +52,48 @@ char* password = "password";
 
 WiFiClientSecure client;
 WifiManager wifiManager(ssid, password);
+
+void reportSystemStatus() {
+    if(WiFi.status() != WL_CONNECTED) {
+        Serial.println("WiFi is not connected. Cannot report status.");
+        return;
+    }
+
+    int batteryPercentage = Battery::get_instance().getPercentage();
+    const char* wifiState = (WiFi.status() == WL_CONNECTED) ? "Connected" : "Disconnected";
+
+    // Format data as text
+    String dataText;
+    dataText += "WiFi State: ";
+    dataText += wifiState;
+    dataText += "\nFirmware Version: ";
+    dataText += firmwareVersion;
+    dataText += "\nBattery Percentage: ";
+    dataText += batteryPercentage;
+    dataText += "%";
+
+    // HTTP POST over HTTPS
+    WiFiClientSecure secureClient;
+    secureClient.setCACert(rootCACertificate); 
+    HTTPClient http;
+    http.begin(secureClient, "https://server.com/report"); // Use HTTPS URL
+    http.addHeader("Content-Type", "text/plain"); // Specify content-type as text/plain
+
+    int httpResponseCode = http.POST(dataText);
+
+    if(httpResponseCode > 0) {
+        Serial.print("HTTP Response code: ");
+        Serial.println(httpResponseCode);
+        // Optionally, print the response
+        String response = http.getString();
+        Serial.println(response);
+    } else {
+        Serial.print("Error on sending POST: ");
+        Serial.println(httpResponseCode);
+    }
+
+    http.end(); 
+}
 
 bool checkForVersionUpdate() {
     WiFiClientSecure secureClient;
