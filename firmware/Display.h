@@ -12,7 +12,8 @@ class Display {
 	enum menuState {
 		HOME,
 		BUS_ENTRY,
-		WIFI_STATUS
+		WIFI_STATUS,
+    FIRMWARE_VERSION
 	};
 
 	// Navigation States (The different options to scroll between)

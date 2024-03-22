@@ -199,6 +199,10 @@ void Display::render(){
         SNPRINTF_NO_TERM(&output[17], 15, "Not connect");
       }
       break;
+    // case FIRMWARE_VERSION: {
+    //   SNPRINTF_NO_TERM(output, 16, "Firmware v%s", firmwareVersion);
+    //   break;
+    //   }
 	}
 
 	setDisplay(output);

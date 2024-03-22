@@ -1,5 +1,4 @@
 #include "WifiManager.h"
-//TODO: check this function for the HTTPS connection, maybe it is a problem
 WifiManager::WifiManager(const char* ssid, const char* password)
   : _ssid(ssid), _password(password), _lastAttempt(0), _state(WIFI_STATE_INIT) {}
 
