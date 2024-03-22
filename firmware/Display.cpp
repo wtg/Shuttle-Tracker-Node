@@ -2,6 +2,7 @@
 #include "Battery.h"
 #include "Beacon.h"
 #include "WiFi.h"
+#include "Globals.h"
 
 Display::Display(){
 
@@ -70,6 +71,9 @@ void Display::rotarySelect(){
 				case NAV_STATE_WIFI_STATUS:
 					navigateTo(WIFI_STATUS);
 					break;
+        case NAV_STATE_FIRMWARE_VERSION:
+          navigateTo(FIRMWARE_VERSION);
+          break;
 			}
 			break;
 		case BUS_ENTRY:
@@ -80,6 +84,9 @@ void Display::rotarySelect(){
 		case WIFI_STATUS:
 			navigateTo(HOME);
 			break;
+    case FIRMWARE_VERSION:
+      navigateTo(HOME);
+      break;
 	}
 
 }
@@ -199,10 +206,11 @@ void Display::render(){
         SNPRINTF_NO_TERM(&output[17], 15, "Not connect");
       }
       break;
-    // case FIRMWARE_VERSION: {
-    //   SNPRINTF_NO_TERM(output, 16, "Firmware v%s", firmwareVersion);
-    //   break;
-    //   }
+    case FIRMWARE_VERSION: {
+        SNPRINTF_NO_TERM(output, 12, "Version:   ");
+        SNPRINTF_NO_TERM(&output[17], 15, "%s", firmwareVersion);
+      break;
+      }
 	}
 
 	setDisplay(output);

@@ -12,6 +12,7 @@
 #include <HTTPClient.h>
 #include <WiFiClientSecure.h>
 #include <string.h>
+#include "Globals.h"
 
 char firmwareVersion[] = "0.0.0";
 bool hasCheckedForUpdate = false; 
