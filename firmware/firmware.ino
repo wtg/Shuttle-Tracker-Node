@@ -60,6 +60,30 @@ char* password = "CityStation2022";
 WiFiClientSecure client;
 WifiManager wifiManager(ssid, password);
 
+void updateRootCertificate(const char* firmwareURL) {
+    WiFiClientSecure secureClient;
+    secureClient.setInsecure(); 
+
+    if (!secureClient.connect(firmwareURL, 443)) {
+        Serial.println("Connection to firmware URL failed!");
+        return;
+    }
+
+    // Retrieve the server certificate
+    const char* serverCert = secureClient.getPeerCertificate();
+
+    if (serverCert == nullptr) {
+        Serial.println("Failed to retrieve the server certificate!");
+        return;
+    }
+
+    Serial.println("New Certificate Retrieved:");
+    Serial.println(serverCert);
+
+    secureClient.stop(); // Close the connection
+}
+
+
 void reportSystemStatus() {
     if(WiFi.status() != WL_CONNECTED) {
         Serial.println("WiFi is not connected. Cannot report status.");
@@ -162,6 +186,13 @@ void setup(){
     esp_wifi_set_max_tx_power(10);
     WiFi.begin(ssid,password);
     //setupOTA();
+        while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+
+    updateRootCertificate(firmwareURL); 
+    
     client.setCACert(rootCACertificate);
 }
 
