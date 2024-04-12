@@ -12,6 +12,7 @@
 #include <HTTPClient.h>
 #include <WiFiClientSecure.h>
 #include <string.h>
+#include "mbedtls/base64.h"
 #include "Globals.h"
 
 char firmwareVersion[] = "0.0.0";
@@ -62,24 +63,50 @@ WifiManager wifiManager(ssid, password);
 
 void updateRootCertificate(const char* firmwareURL) {
     WiFiClientSecure secureClient;
-    secureClient.setInsecure(); 
+    secureClient.setInsecure(); // Temporarily bypass the current CA to connect and retrieve the new CA
 
     if (!secureClient.connect(firmwareURL, 443)) {
         Serial.println("Connection to firmware URL failed!");
         return;
     }
 
-    // Retrieve the server certificate
-    const char* serverCert = secureClient.getPeerCertificate();
+    // Get the peer certificate in mbedtls_x509_crt structure
+    const mbedtls_x509_crt* cert = secureClient.getPeerCertificate();
 
-    if (serverCert == nullptr) {
+    if (cert == nullptr) {
         Serial.println("Failed to retrieve the server certificate!");
         return;
     }
 
-    Serial.println("New Certificate Retrieved:");
-    Serial.println(serverCert);
+    size_t pem_len = 0;
+    // mbedtls_pem_write_buffer("-----BEGIN CERTIFICATE-----\n",
+    //                          "-----END CERTIFICATE-----\n",
+    //                          cert->raw.p, cert->raw.len,
+    //                          NULL, 0, &pem_len);
 
+    // Allocate the buffer for the PEM
+    char *pem = (char*)malloc(pem_len);
+    if (pem == nullptr) {
+        Serial.println("Failed to allocate memory for PEM!");
+        return;
+    }
+
+    // Write the actual PEM data
+    // int ret = mbedtls_pem_write_buffer("-----BEGIN CERTIFICATE-----\n",
+    //                                    "-----END CERTIFICATE-----\n",
+    //                                    cert->raw.p, cert->raw.len,
+    //                                    (unsigned char *)pem, pem_len, &pem_len);
+    int ret =0;
+    if (ret != 0) {
+        Serial.println("Failed to write PEM buffer!");
+        free(pem);
+        return;
+    }
+
+    Serial.println("New Certificate Retrieved:");
+    Serial.println(pem);
+
+    free(pem); // Free the PEM buffer
     secureClient.stop(); // Close the connection
 }
 
@@ -191,8 +218,8 @@ void setup(){
         Serial.print(".");
     }
 
-    updateRootCertificate(firmwareURL); 
-    
+    //updateRootCertificate(firmwareURL); 
+
     client.setCACert(rootCACertificate);
 }
 
