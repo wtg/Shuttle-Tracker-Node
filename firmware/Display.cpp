@@ -33,6 +33,23 @@ void Display::showWiFiConnectionMessage() {
     backlightOn(); // Ensure the backlight is on when displaying the message
 }
 
+void Display::setDisplay(const char* string) {
+    lcd.clear(); // Clear previous content
+    lcd.setCursor(0, 0);
+    int i = 0;
+    while (string[i] != '\n' && string[i] != '\0' && i < 16) {
+        lcd.write(string[i++]);
+    }
+    lcd.setCursor(0, 1);
+    if (string[i] == '\n') i++;  // Move past the newline character
+    int j = 0;
+    while (string[i] != '\0' && j < 16) {
+        lcd.write(string[i++]);
+        j++;
+    }
+}
+
+
 
 
 void Display::rotaryRight(){
