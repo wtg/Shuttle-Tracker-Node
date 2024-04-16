@@ -17,6 +17,11 @@
 
 char firmwareVersion[] = "0.0.0";
 bool hasCheckedForUpdate = false; 
+const char* firmwareURL = "https://staging.shuttletracker.app/node/firmware.ino.bin";  // repo link, should be ending with .bin to fit the HTTPUpdate.h library
+const char* versionURL = "https://staging.shuttletracker.app/node/version.txt"; // version link
+char* ssid = "City Station";
+char* password = "CityStation2022";
+
 
 const char* rootCACertificate = \
 "-----BEGIN CERTIFICATE-----\n" \
@@ -50,13 +55,6 @@ const char* rootCACertificate = \
 "nLRbwHOoq7hHwg==\n" \
 "-----END CERTIFICATE-----\n";
 
-
-
-const char* firmwareURL = "https://staging.shuttletracker.app/node/firmware.ino.bin";  // repo link, should be ending with .bin to fit the HTTPUpdate.h library
-const char* versionURL = "https://staging.shuttletracker.app/node/version.txt"; // version link
-
-char* ssid = "City Station";
-char* password = "CityStation2022";
 
 WiFiClientSecure client;
 WifiManager wifiManager(ssid, password);

@@ -27,6 +27,14 @@ void Display::init(){
 
 }
 
+void Display::showWiFiConnectionMessage() {
+    const char* message = "Connecting to WiFi\nPlease don't interrupt";
+    setDisplay(message);
+    backlightOn(); // Ensure the backlight is on when displaying the message
+}
+
+
+
 void Display::rotaryRight(){
 
 	if(startBacklight()) return;
