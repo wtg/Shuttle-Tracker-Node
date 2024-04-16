@@ -70,6 +70,7 @@ public:
 	void keypadPress(char digit);
 	void backspace();
 	void back();
+  void showWiFiConnectionMessage();
 
 	// Called from the main loop function
 	void loop();
@@ -87,6 +88,7 @@ private:
 
 	// Display a string on the actual hardware display
 	void setDisplay(const char* string);
+  void setDisplay1(const char* string);
 
 	// Backlight control
 	void backlightOn();
