@@ -29,11 +29,11 @@ void Display::init(){
 
 void Display::showWiFiConnectionMessage() {
     const char* message = "Connecting to WiFi\nPlease don't interrupt";
-    setDisplay(message);
+    setDisplay1(message);
     backlightOn(); // Ensure the backlight is on when displaying the message
 }
 
-void Display::setDisplay(const char* string) {
+void Display::setDisplay1(const char* string) {
     lcd.clear(); // Clear previous content
     lcd.setCursor(0, 0);
     int i = 0;
