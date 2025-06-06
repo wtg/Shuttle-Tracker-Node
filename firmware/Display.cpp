@@ -1,6 +1,8 @@
 #include "Display.h"
 #include "Battery.h"
 #include "Beacon.h"
+#include "WiFi.h"
+#include "Globals.h"
 
 Display::Display(){
 
@@ -24,6 +26,31 @@ void Display::init(){
 	render();
 
 }
+
+void Display::showWiFiConnectionMessage() {
+    const char* message = "Connecting to WiFi\nPlease don't interrupt";
+    setDisplay1(message);
+    backlightOn(); // Ensure the backlight is on when displaying the message
+}
+
+void Display::setDisplay1(const char* string) {
+    lcd.clear(); // Clear previous content
+    lcd.setCursor(0, 0);
+    int i = 0;
+    while (string[i] != '\n' && string[i] != '\0' && i < 16) {
+        lcd.write(string[i++]);
+    }
+    lcd.setCursor(0, 1);
+    if (string[i] == '\n') i++;  // Move past the newline character
+    int j = 0;
+    while (string[i] != '\0' && j < 16) {
+        lcd.write(string[i++]);
+        j++;
+    }
+}
+
+
+
 
 void Display::rotaryRight(){
 
@@ -69,6 +96,9 @@ void Display::rotarySelect(){
 				case NAV_STATE_WIFI_STATUS:
 					navigateTo(WIFI_STATUS);
 					break;
+        case NAV_STATE_FIRMWARE_VERSION:
+          navigateTo(FIRMWARE_VERSION);
+          break;
 			}
 			break;
 		case BUS_ENTRY:
@@ -79,6 +109,9 @@ void Display::rotarySelect(){
 		case WIFI_STATUS:
 			navigateTo(HOME);
 			break;
+    case FIRMWARE_VERSION:
+      navigateTo(HOME);
+      break;
 	}
 
 }
@@ -192,8 +225,17 @@ void Display::render(){
 			SNPRINTF_NO_TERM(&output[17], 1 + BUS_ID_SIZE + 1, "#%s", busEntryID)
 			break;
 		case WIFI_STATUS:
-			SNPRINTF_NO_TERM(&output[17], 15, "129.161.000.000")
-			break;
+			  if (WiFi.status() == WL_CONNECTED) {
+          SNPRINTF_NO_TERM(&output[17], 15, "%s", WiFi.localIP().toString().c_str());
+        } else {
+        SNPRINTF_NO_TERM(&output[17], 15, "Not connect");
+      }
+      break;
+    case FIRMWARE_VERSION: {
+        SNPRINTF_NO_TERM(output, 12, "Version:   ");
+        SNPRINTF_NO_TERM(&output[17], 15, "%s", firmwareVersion);
+      break;
+      }
 	}
 
 	setDisplay(output);

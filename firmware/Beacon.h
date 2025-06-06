@@ -6,16 +6,17 @@
 class Beacon {
 
 	// Broadcast settings in ms
-	const int broadcastInterval = 1000;
+	const int broadcastInterval = 5000;
 	const int broadcastDuration = 100;
 	unsigned long lastBroadcastTime = 0;
 
 	// Beacon status
-	bool beaconEnabled = false;
+	bool beaconEnabled = true;
 	bool broadcasting = false;
 
 	// Bus ID
 	int busID = 0;
+  int deviceID = -1;//TODO: SETUP THE MINOR FIELD
 	bool initialBusIDSet = false;
 
 	// The beacon
@@ -45,6 +46,7 @@ public:
 	bool enabled() const;
 	void start();
 	void stop();
+  uint16_t macToKey();
 
 private:
 	void setBeaconData();

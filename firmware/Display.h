@@ -12,15 +12,17 @@ class Display {
 	enum menuState {
 		HOME,
 		BUS_ENTRY,
-		WIFI_STATUS
+		WIFI_STATUS,
+    FIRMWARE_VERSION
 	};
 
 	// Navigation States (The different options to scroll between)
-	#define N_NAV_STATES 4
+	#define N_NAV_STATES 5
 	#define NAV_STATE_NONE 0
 	#define NAV_STATE_SET_BUS 1
 	#define NAV_STATE_TOGGLE_BT 2
 	#define NAV_STATE_WIFI_STATUS 3
+  #define NAV_STATE_FIRMWARE_VERSION 4
 
 	// Navigation text to display (corresponds with indices above)
 	//  Max 10 characters to fit between << and >>
@@ -28,7 +30,8 @@ class Display {
 		"",
 		"Set Bus ID",
 		"Toggle BT",
-		"Wi-Fi Stat"
+		"Wi-Fi Stat",
+    "Version"
 	};
 
 	// The current menu state (Initialized to the startup state)
@@ -67,6 +70,7 @@ public:
 	void keypadPress(char digit);
 	void backspace();
 	void back();
+  void showWiFiConnectionMessage();
 
 	// Called from the main loop function
 	void loop();
@@ -84,6 +88,7 @@ private:
 
 	// Display a string on the actual hardware display
 	void setDisplay(const char* string);
+  void setDisplay1(const char* string);
 
 	// Backlight control
 	void backlightOn();
