@@ -177,11 +177,11 @@ void Display::loop(){
 }
 
 void Display::setBusID(const char *id){
-	Beacon::get_instance().setBusID(atoi(id));
+	//Beacon::get_instance().setBusID(atoi(id));
 }
 
 void Display::toggleBT(){
-	Beacon::get_instance().toggle();
+	//Beacon::get_instance().toggle();
 	render();
 }
 
@@ -200,11 +200,11 @@ void Display::render(){
 	char output[34] = "                \n                ";
 
 	// Display bus ID
-	if(!Beacon::get_instance().enabled()){
-		SNPRINTF_NO_TERM(output, 11, "#%-3d BT Off", Beacon::get_instance().getBusID())
-	}else{
-		SNPRINTF_NO_TERM(output, 9, "Bus #%-3d", Beacon::get_instance().getBusID())
-	}
+	// if(!Beacon::get_instance().enabled()){
+	// 	SNPRINTF_NO_TERM(output, 11, "#%-3d BT Off", Beacon::get_instance().getBusID())
+	// }else{
+	// 	SNPRINTF_NO_TERM(output, 9, "Bus #%-3d", Beacon::get_instance().getBusID())
+	// }
 
 	// Display battery percentage
 	SNPRINTF_NO_TERM(&output[12], 4, "%3d%%", Battery::get_instance().getPercentage())

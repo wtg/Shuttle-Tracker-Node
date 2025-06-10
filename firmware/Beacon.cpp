@@ -1,136 +1,136 @@
-#include "Beacon.h"
-#include "Arduino.h"
-#include "BLEDevice.h"
-#include "BLEUtils.h"
-#include "BLEServer.h"
-#include "BLEBeacon.h"
+// #include "Beacon.h"
+// #include "Arduino.h"
+// #include "BLEDevice.h"
+// #include "BLEUtils.h"
+// #include "BLEServer.h"
+// #include "BLEBeacon.h"
 
-Beacon::Beacon(){
+// Beacon::Beacon(){
 
-	// Beacon setup
-	BLEDevice::init("Shuttle Tracker Node");
-	pAdvertising = BLEDevice::getAdvertising();
-	BLEDevice::startAdvertising();
-	BLEAdvertisementData oScanResponseData = BLEAdvertisementData();
-	pAdvertising->setScanResponseData(oScanResponseData);
+// 	// Beacon setup
+// 	BLEDevice::init("Shuttle Tracker Node");
+// 	pAdvertising = BLEDevice::getAdvertising();
+// 	BLEDevice::startAdvertising();
+// 	BLEAdvertisementData oScanResponseData = BLEAdvertisementData();
+// 	pAdvertising->setScanResponseData(oScanResponseData);
 
-  // Initialize memory access object and retrieve previous busID.
-	datastore.begin("main", false);
-	busID = datastore.getInt("busId", 0);
-  deviceID = macToKey();
-	setBeaconData();
-	pAdvertising->stop();// Don't broadcast right away
+//   // Initialize memory access object and retrieve previous busID.
+// 	datastore.begin("main", false);
+// 	busID = datastore.getInt("busId", 0);
+//   deviceID = macToKey();
+// 	setBeaconData();
+// 	pAdvertising->stop();// Don't broadcast right away
 
-}
+// }
 
-uint16_t Beacon::macToKey(){
-    uint64_t mac = ESP.getEfuseMac(); // Returns a 64-bit (8 bytes) MAC address
-    uint16_t result = 0;
-    for(int i = 0; i < 8; i++){
-        result ^= (mac >> (i * 8)) & 0xFF; // XOR each byte of the MAC address
-    }
-    return result;
-}
+// uint16_t Beacon::macToKey(){
+//     uint64_t mac = ESP.getEfuseMac(); // Returns a 64-bit (8 bytes) MAC address
+//     uint16_t result = 0;
+//     for(int i = 0; i < 8; i++){
+//         result ^= (mac >> (i * 8)) & 0xFF; // XOR each byte of the MAC address
+//     }
+//     return result;
+// }
 
 
-Beacon& Beacon::get_instance(){
-	static Beacon instance;
-	return instance;
-}
+// Beacon& Beacon::get_instance(){
+// 	static Beacon instance;
+// 	return instance;
+// }
 
-void Beacon::loop(){
+// void Beacon::loop(){
 
-	//if( beaconEnabled){//TODO: CHANGE THIS TO ALLOW FOR BOARDCASTING UPON BOOT
+// 	//if( beaconEnabled){//TODO: CHANGE THIS TO ALLOW FOR BOARDCASTING UPON BOOT
 
-		unsigned long now = millis();
+// 		unsigned long now = millis();
 
-		// Handle millis() overflow
-		if(lastBroadcastTime > now) lastBroadcastTime = 0;
+// 		// Handle millis() overflow
+// 		if(lastBroadcastTime > now) lastBroadcastTime = 0;
 
-		unsigned long elapsed = now - lastBroadcastTime;
+// 		unsigned long elapsed = now - lastBroadcastTime;
 
-		// Broadcast briefly for broadcastDuration then wait for rest of interval
-		if(!broadcasting && elapsed < broadcastDuration){
-			start();
-		}
-		if(broadcasting && elapsed > broadcastDuration){
-			stop();
-		}
+// 		// Broadcast briefly for broadcastDuration then wait for rest of interval
+// 		if(!broadcasting && elapsed < broadcastDuration){
+// 			start();
+// 		}
+// 		if(broadcasting && elapsed > broadcastDuration){
+// 			stop();
+// 		}
 
-		// Wait full interval before resetting timer
-		if(!broadcasting && elapsed > broadcastInterval){
-			lastBroadcastTime = millis();
-		}
+// 		// Wait full interval before resetting timer
+// 		if(!broadcasting && elapsed > broadcastInterval){
+// 			lastBroadcastTime = millis();
+// 		}
 
-	//}
+// 	//}
 
-}
+// }
 
-void Beacon::setBusID(int busID){
+// void Beacon::setBusID(int busID){
 
-	this->busID = busID;
-	datastore.putInt("busID", busID);
+// 	this->busID = busID;
+// 	datastore.putInt("busID", busID);
 
-	// Update beacon data with new bus ID
-	setBeaconData();
+// 	// Update beacon data with new bus ID
+// 	setBeaconData();
 
-	// Automatically turn on after entering the bus ID for the first time
+// 	// Automatically turn on after entering the bus ID for the first time
 
-}
+// }
 
-int Beacon::getBusID() const{
-	return busID;
-}
+// int Beacon::getBusID() const{
+// 	return busID;
+// }
 
-void Beacon::on(){
-	beaconEnabled = true;
-}
+// void Beacon::on(){
+// 	beaconEnabled = true;
+// }
 
-void Beacon::off(){
-	stop();
-	beaconEnabled = false;
-}
+// void Beacon::off(){
+// 	stop();
+// 	beaconEnabled = false;
+// }
 
-void Beacon::toggle(){
-	if(beaconEnabled) off();
-	else if(!beaconEnabled) on();
-}
+// void Beacon::toggle(){
+// 	if(beaconEnabled) off();
+// 	else if(!beaconEnabled) on();
+// }
 
-bool Beacon::enabled() const{
-	return beaconEnabled;
-}
+// bool Beacon::enabled() const{
+// 	return beaconEnabled;
+// }
 
-void Beacon::start(){
-	pAdvertising->start();
-	broadcasting = true;
-  Serial.println("Device started broadcasting.");
-  Serial.println("Broadcasting with busID: " + String(busID));
-   Serial.println("Broadcasting with MAC key: " + String(macToKey(), HEX));
-}
+// void Beacon::start(){
+// 	pAdvertising->start();
+// 	broadcasting = true;
+//   Serial.println("Device started broadcasting.");
+//   Serial.println("Broadcasting with busID: " + String(busID));
+//    Serial.println("Broadcasting with MAC key: " + String(macToKey(), HEX));
+// }
 
-void Beacon::stop(){
-	pAdvertising->stop();
-	broadcasting = false;
-  Serial.println("Device stopped broadcasting.");
-}
+// void Beacon::stop(){
+// 	pAdvertising->stop();
+// 	broadcasting = false;
+//   Serial.println("Device stopped broadcasting.");
+// }
 
-void Beacon::setBeaconData(){
+// void Beacon::setBeaconData(){
 
-	BLEBeacon oBeacon = BLEBeacon();
-	oBeacon.setManufacturerId(0x4C00); // fake Apple 0x004C LSB (ENDIAN_CHANGE_U16!)
-	oBeacon.setProximityUUID(BLEUUID("9C3F95DC-7A90-4C5E-84CB-3D406D87B73B"));
+// 	BLEBeacon oBeacon = BLEBeacon();
+// 	oBeacon.setManufacturerId(0x4C00); // fake Apple 0x004C LSB (ENDIAN_CHANGE_U16!)
+// 	oBeacon.setProximityUUID(BLEUUID("9C3F95DC-7A90-4C5E-84CB-3D406D87B73B"));
 
-  oBeacon.setMajor(busID);
-  oBeacon.setMinor(macToKey());// always set the mac based key to minor field
+//   oBeacon.setMajor(busID);
+//   oBeacon.setMinor(macToKey());// always set the mac based key to minor field
   
-	BLEAdvertisementData oAdvertisementData = BLEAdvertisementData();
-	oAdvertisementData.setFlags(0x04); // BR_EDR_NOT_SUPPORTED 0x04
-	std::string strServiceData = "";
-	strServiceData += (char)26;     // Len
-	strServiceData += (char)0xFF;   // Type
-	strServiceData += oBeacon.getData();
-	oAdvertisementData.addData(strServiceData);
-	pAdvertising->setAdvertisementData(oAdvertisementData);
+// 	BLEAdvertisementData oAdvertisementData = BLEAdvertisementData();
+// 	oAdvertisementData.setFlags(0x04); // BR_EDR_NOT_SUPPORTED 0x04
+// 	std::string strServiceData = "";
+// 	strServiceData += (char)26;     // Len
+// 	strServiceData += (char)0xFF;   // Type
+// 	strServiceData += oBeacon.getData();
+// 	oAdvertisementData.addData(strServiceData);
+// 	pAdvertising->setAdvertisementData(oAdvertisementData);
 
-}
+// }
 
