@@ -26,8 +26,15 @@ char firmwareVersion[] = "0.0.0";
 bool hasCheckedForUpdate = false; 
 const char* firmwareURL = "https://staging.shuttletracker.app/node/firmware.ino.bin";  // repo link, should be ending with .bin to fit the HTTPUpdate.h library
 const char* versionURL = "https://staging.shuttletracker.app/node/version.txt"; // version link
-char* ssid = "City Station";
-char* password = "CityStation2022";
+char* ssid = "";
+char* password = "";
+
+const char* APN      = ""; //check your SIM card for APN
+const char* GPRS_USER = "";
+const char* GPRS_PASS = "";
+const char* FB_HOST  = "esp32-gps-firebase-6df57-default-rtdb.firebaseio.com";
+const char* FB_AUTH  = ""; //contact tranh4@rpi.edu for firebase auth.
+const char* FB_PATH  = "/";
 
 
 const char* rootCACertificate = \
@@ -62,7 +69,14 @@ const char* rootCACertificate = \
 "nLRbwHOoq7hHwg==\n" \
 "-----END CERTIFICATE-----\n";
 
-TelemetryManager telemetry(SIM_RX_PIN, SIM_TX_PIN, GPS_RX_PIN, GPS_TX_PIN, PHONE);
+TelemetryManager telemetry(
+  SIM_RX_PIN, SIM_TX_PIN,
+  GPS_RX_PIN, GPS_TX_PIN,
+  PHONE,
+  APN, GPRS_USER, GPRS_PASS,
+  FB_HOST, FB_AUTH, FB_PATH,
+  15000UL // 15s interval
+);
 
 WiFiClientSecure client;
 WifiManager wifiManager(ssid, password);

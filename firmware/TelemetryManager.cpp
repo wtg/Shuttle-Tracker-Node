@@ -1,28 +1,52 @@
 #include "TelemetryManager.h"
 
-TelemetryManager::TelemetryManager(uint8_t simRx, uint8_t simTx,
-                                   uint8_t gpsRx, uint8_t gpsTx,
-                                   const char* phone)
-  : simSerial(1), gpsSerial(2), phoneNumber(phone) {
-  // configure UART pins
-  simSerial.begin(9600, SERIAL_8N1, simRx, simTx);
-  gpsSerial.begin(9600, SERIAL_8N1, gpsRx, gpsTx);
+// Adjust RX buffer if needed before TinyGSM include
+#ifndef TINY_GSM_RX_BUFFER
+#define TINY_GSM_RX_BUFFER 256
+#endif
+
+TelemetryManager::TelemetryManager(
+  uint8_t simRx, uint8_t simTx,
+  uint8_t gpsRx, uint8_t gpsTx,
+  const char* phone,
+  const char* apn_, const char* user_, const char* pass_,
+  const char* fbHost_, const char* fbAuth_, const char* fbPath_,
+  unsigned long fbIntervalMs
+) :
+  simSerial(1),
+  gpsSerial(2),
+  phoneNumber(phone),
+  modem(simSerial),
+  clientSecure(modem, 0),
+  httpClient(clientSecure, fbHost_, 443),
+  apn(apn_), gprsUser(user_), gprsPass(pass_),
+  fbHost(fbHost_), fbAuth(fbAuth_), fbPath(fbPath_),
+  fbInterval(fbIntervalMs), lastFbMillis(0)
+{
+    // Initialize UART pins
+    simSerial.begin(9600, SERIAL_8N1, simRx, simTx);
+    gpsSerial.begin(9600, SERIAL_8N1, gpsRx, gpsTx);
 }
 
 void TelemetryManager::begin() {
-  // SIM initialization
+  // SIM configuration
   simSerial.println("AT");             waitForResponse("OK", 2000);
   simSerial.println("AT+CMGF=1");      waitForResponse("OK", 2000);
-  simSerial.println("AT+CNMI=2,1,0,0,0"); // forward SMS
-  waitForResponse("OK", 2000);
+  simSerial.println("AT+CNMI=2,1,0,0,0"); waitForResponse("OK", 2000);
+
+  // Modem restart & HTTP timeout
+  modem.restart();
+  httpClient.setHttpResponseTimeout(90 * 1000);
+
+  Serial.println("TelemetryManager initialized.");
 }
 
 void TelemetryManager::handle() {
-  // 1) Feed GPS data
+  // 1) Feed GPS
   while (gpsSerial.available()) {
     gps.encode(gpsSerial.read());
   }
-  // 2) Feed SIM data and parse lines
+  // 2) Feed SIM and process SMS lines
   while (simSerial.available()) {
     char c = simSerial.read();
     smsBuffer += c;
@@ -31,7 +55,23 @@ void TelemetryManager::handle() {
       smsBuffer.clear();
     }
   }
-  delay(5000);
+  // 3) Periodic Firebase reporting
+  unsigned long now = millis();
+  if (now - lastFbMillis >= fbInterval) {
+    lastFbMillis = now;
+    if (connectGPRS()) {
+      // build JSON
+      if (gps.location.isValid()) {
+        String data = "{";
+        data += "\"lat\":" + String(gps.location.lat(), 6) + ",";
+        data += "\"lng\":" + String(gps.location.lng(), 6);
+        data += "}";
+        postToFirebase(data);
+      }
+      // clean up
+      modem.gprsDisconnect();
+    }
+  }
 }
 
 bool TelemetryManager::waitForResponse(const char* target, uint32_t timeout_ms) {
@@ -79,7 +119,7 @@ void TelemetryManager::processLine(const String& line) {
       if (body.equalsIgnoreCase("get location")) sendLocationSMS();
       else if (body.equalsIgnoreCase("get speed"))    sendSpeedSMS();
     }
-    // cleanup
+    // cleanup SMS
     simSerial.println("AT+CMGD=1,4");
     waitForResponse("OK", 2000);
   }
@@ -107,4 +147,25 @@ void TelemetryManager::sendSpeedSMS() {
   simSerial.print(msg);
   simSerial.write(0x1A);
   waitForResponse("OK", 10000);
+}
+
+bool TelemetryManager::connectGPRS() {
+  return modem.gprsConnect(apn, gprsUser, gprsPass);
+}
+
+void TelemetryManager::postToFirebase(const String& data) {
+  // build full path
+  String url = String(fbPath);
+  if (!url.startsWith("/")) url = "/" + url;
+  url += ".json?auth=" + String(fbAuth);
+
+  // HTTP PATCH (using PUT for entire path)
+  httpClient.put(url.c_str(), "application/json", data);
+  int status = httpClient.responseStatusCode();
+  String resp  = httpClient.responseBody();
+  Serial.printf("Firebase [%d]: %s\n", status, resp.c_str());
+
+  if (!httpClient.connected()) {
+    httpClient.stop();
+  }
 }
