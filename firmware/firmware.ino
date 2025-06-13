@@ -14,6 +14,13 @@
 #include <string.h>
 #include "mbedtls/base64.h"
 #include "Globals.h"
+#include "TelemetryManager.h"
+
+#define SIM_RX_PIN 4
+#define SIM_TX_PIN 2
+#define GPS_RX_PIN 16
+#define GPS_TX_PIN 17
+const char* PHONE = "";
 
 char firmwareVersion[] = "0.0.0";
 bool hasCheckedForUpdate = false; 
@@ -55,6 +62,7 @@ const char* rootCACertificate = \
 "nLRbwHOoq7hHwg==\n" \
 "-----END CERTIFICATE-----\n";
 
+TelemetryManager telemetry(SIM_RX_PIN, SIM_TX_PIN, GPS_RX_PIN, GPS_TX_PIN, PHONE);
 
 WiFiClientSecure client;
 WifiManager wifiManager(ssid, password);
@@ -207,6 +215,7 @@ void checkforUpdate() {
 
 void setup(){
     Serial.begin(115200);
+    telemetry.begin();
     Display::get_instance().init();
     esp_wifi_set_max_tx_power(10);
     WiFi.begin(ssid,password);
@@ -223,6 +232,7 @@ void setup(){
 
 void loop(){
   //Beacon::get_instance().loop();
+  telemetry.handle();
 	IO::get_instance().loop();
 	Display::get_instance().loop();
 	Battery::get_instance().loop();
