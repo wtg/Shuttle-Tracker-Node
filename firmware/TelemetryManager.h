@@ -2,6 +2,8 @@
 #ifndef TELEMETRY_MANAGER_H
 #define TELEMETRY_MANAGER_H
 
+// Define your modem before including TinyGSM
+#define TINY_GSM_MODEM_SIM800
 #define TINY_GSM_RX_BUFFER 256
 
 #include <TinyGsmClient.h>
