@@ -1,7 +1,7 @@
 // Unit tests for TelemetryManager using GoogleTest
 
 #include <gtest/gtest.h>
-#include "TelemetryManager.h"
+#include "../TelemetryManager.h"
 
 // Simple FakeStream to capture input/output
 class FakeStream : public Stream {
