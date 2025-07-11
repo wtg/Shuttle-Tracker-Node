@@ -15,6 +15,7 @@
 #include "mbedtls/base64.h"
 #include "Globals.h"
 #include "TelemetryManager.h"
+#include "OTAUpdateManager.h"
 
 #define SIM_RX_PIN 4
 #define SIM_TX_PIN 2
@@ -76,6 +77,12 @@ TelemetryManager telemetry(
   APN, GPRS_USER, GPRS_PASS,
   FB_HOST, FB_AUTH, FB_PATH,
   15000UL // 15s interval
+);
+
+OTAUpdateManager ota(
+    firmwareURL,
+    versionURL,
+    rootCACertificate
 );
 
 WiFiClientSecure client;
@@ -173,59 +180,59 @@ void reportSystemStatus() {
     http.end(); 
 }
 
-bool checkForVersionUpdate() {
-    WiFiClientSecure secureClient;
-    secureClient.setCACert(rootCACertificate);
+// bool checkForVersionUpdate() {
+//     WiFiClientSecure secureClient;
+//     secureClient.setCACert(rootCACertificate);
 
-    HTTPClient http;
-    bool check = false;
-    http.begin(secureClient ,versionURL);
-    int httpCode = http.GET();
+//     HTTPClient http;
+//     bool check = false;
+//     http.begin(secureClient ,versionURL);
+//     int httpCode = http.GET();
 
-    if (httpCode == HTTP_CODE_OK) {
-        String latestVersion = http.getString();
-        latestVersion.trim(); 
+//     if (httpCode == HTTP_CODE_OK) {
+//         String latestVersion = http.getString();
+//         latestVersion.trim(); 
 
-        Serial.print("Current firmware version: ");
-        Serial.println(firmwareVersion);
-        Serial.print("Latest firmware version: ");
-        Serial.println(latestVersion);
+//         Serial.print("Current firmware version: ");
+//         Serial.println(firmwareVersion);
+//         Serial.print("Latest firmware version: ");
+//         Serial.println(latestVersion);
 
-        if (latestVersion != firmwareVersion) {
-            strncpy(firmwareVersion, latestVersion.c_str(), sizeof(firmwareVersion) - 1);
-            firmwareVersion[sizeof(firmwareVersion) - 1] = '\0'; 
-            Serial.println("A new firmware version is available, updating...");
-            check = true;
-        } else {
-            Serial.println("Firmware is up to date.");
-        }
-    } else {
-        Serial.print("Failed to check for firmware version. HTTP error: ");
-        Serial.println(httpCode);
-    }
-    http.end();
-    return check;
-}
+//         if (latestVersion != firmwareVersion) {
+//             strncpy(firmwareVersion, latestVersion.c_str(), sizeof(firmwareVersion) - 1);
+//             firmwareVersion[sizeof(firmwareVersion) - 1] = '\0'; 
+//             Serial.println("A new firmware version is available, updating...");
+//             check = true;
+//         } else {
+//             Serial.println("Firmware is up to date.");
+//         }
+//     } else {
+//         Serial.print("Failed to check for firmware version. HTTP error: ");
+//         Serial.println(httpCode);
+//     }
+//     http.end();
+//     return check;
+// }
+//
+// void checkforUpdate() {
+//   Serial.println("Checking for firmware updates...");
+//   client.setCACert(rootCACertificate);  
+//   t_httpUpdate_return ret = httpUpdate.update(client, firmwareURL);
 
-void checkforUpdate() {
-  Serial.println("Checking for firmware updates...");
-  client.setCACert(rootCACertificate);  
-  t_httpUpdate_return ret = httpUpdate.update(client, firmwareURL);
+//   switch (ret) {
+//     case HTTP_UPDATE_FAILED:
+//       Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s", httpUpdate.getLastError(), httpUpdate.getLastErrorString().c_str());
+//       break;
 
-  switch (ret) {
-    case HTTP_UPDATE_FAILED:
-      Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s", httpUpdate.getLastError(), httpUpdate.getLastErrorString().c_str());
-      break;
+//     case HTTP_UPDATE_NO_UPDATES:
+//       Serial.println("HTTP_UPDATE_NO_UPDATES");
+//       break;
 
-    case HTTP_UPDATE_NO_UPDATES:
-      Serial.println("HTTP_UPDATE_NO_UPDATES");
-      break;
-
-    case HTTP_UPDATE_OK:
-      Serial.println("HTTP_UPDATE_OK");
-      break;
-    }
-}
+//     case HTTP_UPDATE_OK:
+//       Serial.println("HTTP_UPDATE_OK");
+//       break;
+//     }
+// }
 
 void setup(){
     Serial.begin(115200);
@@ -239,6 +246,8 @@ void setup(){
         Serial.print(".");
     }
 
+    ota.begin();
+
     //updateRootCertificate(firmwareURL); 
 
     client.setCACert(rootCACertificate);
@@ -251,14 +260,18 @@ void loop(){
 	Display::get_instance().loop();
 	Battery::get_instance().loop();
   wifiManager.attemptConnect();
-  if (WiFi.status() == WL_CONNECTED) {
-    if (!hasCheckedForUpdate) { 
-      if (!checkForVersionUpdate()) {
-      }
-      hasCheckedForUpdate = true; // Mark that the check has been done
-    }
-  } else {
-    hasCheckedForUpdate = false; // Reset the flag if disconnected, to check again next time it connects
-  }
+
+  // OTA perform
+  //ota.checkAndUpdate();
+
+  // if (WiFi.status() == WL_CONNECTED) {
+  //   if (!hasCheckedForUpdate) { 
+  //     if (!checkForVersionUpdate()) {
+  //     }
+  //     hasCheckedForUpdate = true; // Mark that the check has been done
+  //   }
+  // } else {
+  //   hasCheckedForUpdate = false; // Reset the flag if disconnected, to check again next time it connects
+  // }
 }
 
